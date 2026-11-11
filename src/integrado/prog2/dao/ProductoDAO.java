@@ -116,13 +116,12 @@ public class ProductoDAO implements GenericDAO<Producto> {
         String sql = "UPDATE producto SET nombre = ?, precio = ?, descripcion = ?, "
                    + "stock = ?, imagen = ?, disponible = ? "
                    + "WHERE id = ? AND eliminado = FALSE";
-        try (Connection conexion = conexionDB.abrir(configuracion);
-             PreparedStatement sentencia = conexion.prepareStatement(sql)) {
-            cargarParametros(sentencia, producto);
-            sentencia.setLong(7, producto.getId());
-            if (sentencia.executeUpdate() == 0) {
-                throw new EntidadNoEncontradaException(
-                        "El producto no existe, está eliminado o no se registraron cambios.");
+        try (Connection conexion = conexionDB.abrir(configuracion)) {
+            verificarProductoActivo(conexion, producto.getId());
+            try (PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+                cargarParametros(sentencia, producto);
+                sentencia.setLong(7, producto.getId());
+                sentencia.executeUpdate();
             }
         } catch (SQLException ex) {
             throw new PersistenciaException("No se pudo actualizar el producto.", ex);
