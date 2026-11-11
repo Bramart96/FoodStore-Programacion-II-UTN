@@ -57,3 +57,11 @@ El estudiante dejó preparado en consola un pedido **sin confirmar** con los pro
 - La consulta de Workbench posterior mostró ID 1 = 20 e ID 2 = 0; el primer descuento fue revertido.
 - **Comprobado:** rollback sin descuentos parciales.
 - **Aún pendiente:** restauración del ID 2 a 15 y ausencia del pedido fallido en memoria.
+
+
+### Cierre de PED-T10 — comprobación en menú
+- Se restauró el stock temporal del producto ID 2 a 15 (ID 1 se mantuvo en 20).
+- Captura de PowerShell aportada por el estudiante: mensaje "No hay pedidos activos en memoria".
+- En consulta por usuario ID 1 aparece únicamente el pedido anterior ID 1 [BAJA LÓGICA], estado CANCELADO, total 17000, con detalle histórico.
+- No aparece el pedido fallido de 20500.
+- **PED-T10 validado en JDBC y en memoria.**
