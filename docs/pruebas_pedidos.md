@@ -47,3 +47,13 @@ El estudiante dejó preparado en consola un pedido **sin confirmar** con los pro
 - ID 2: stock **15**, disponible **1**.
 
 **Aún no se ejecutó la prueba de rollback ni se modificó el stock para provocarla.** Pasos posteriores: cambiar temporalmente el stock del ID 2 a cero, confirmar el borrador, comprobar que el stock del ID 1 no disminuye y que no se guarda pedido en memoria, y restaurar ID 2 a 15. Usar UPDATE restringido por ID y valor anterior, verificar filas afectadas. No repetir confirmación antes de restaurar los valores.
+
+
+## Resultado manual de PED-T10 — 11/11/2026
+- Pedido de prueba: una unidad del producto 1 ($8500) y una del producto 2 ($12000), total $20500.
+- Stocks de partida en MySQL: ID 1 = 20; ID 2 = 15.
+- Se cambió temporalmente el stock de ID 2 a 0 en Workbench.
+- El estudiante intentó confirmar; el programa comunicó stock insuficiente del ID 2 y rechazó la confirmación.
+- La consulta de Workbench posterior mostró ID 1 = 20 e ID 2 = 0; el primer descuento fue revertido.
+- **Comprobado:** rollback sin descuentos parciales.
+- **Aún pendiente:** restauración del ID 2 a 15 y ausencia del pedido fallido en memoria.
