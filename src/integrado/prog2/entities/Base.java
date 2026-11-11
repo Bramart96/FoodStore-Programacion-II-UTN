@@ -57,6 +57,30 @@ public abstract class Base {
     }
 
     /**
+     * Dos entidades persistidas del mismo tipo son iguales si comparten ID.
+     * Las entidades sin ID solo son iguales a sí mismas.
+     */
+    @Override
+    public boolean equals(Object objeto) {
+        if (this == objeto) {
+            return true;
+        }
+        if (objeto == null || getClass() != objeto.getClass()) {
+            return false;
+        }
+        Base otra = (Base) objeto;
+        return id != null && id.equals(otra.id);
+    }
+
+    /**
+     * Mantiene el hash estable aunque el ID se asigne después del alta.
+     */
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
+    /**
      * Conserva la entidad y la marca como eliminada.
      */
     public void eliminar() {
