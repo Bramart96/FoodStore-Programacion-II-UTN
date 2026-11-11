@@ -49,3 +49,8 @@
 - Después de provocar stock insuficiente en la segunda línea, se verificó rollback en Workbench (ID 1 = 20, ID 2 = 0) y luego se restauró ID 2 = 15.
 - En consola, lista de pedidos activos vacía; historial del usuario ID 1 conserva solo pedido ID 1 cancelado/de baja, total 17000; no contiene el pedido rechazado de 20500.
 - Para el video explicar que la transacción de stock es atómica y que solo se incorpora un pedido al repositorio en memoria si el descuento se confirma con éxito.
+
+
+### Prueba de reinicio — memoria volátil (11/11/2026)
+- El estudiante cerró y reabrió la aplicación; verificó que los listados de usuarios y pedidos quedaron vacíos.
+- Para la demostración final, contrastar en el mismo reinicio con categorías y productos persistentes. La segunda mitad de esta prueba está pendiente.
