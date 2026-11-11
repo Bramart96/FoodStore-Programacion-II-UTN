@@ -1,6 +1,7 @@
 package integrado.prog2.ui;
 
 import integrado.prog2.entities.Usuario;
+import integrado.prog2.exception.EntidadNoEncontradaException;
 import integrado.prog2.enums.Rol;
 import integrado.prog2.service.UsuarioService;
 import java.util.List;
@@ -37,7 +38,8 @@ public class MenuUsuarios {
                     case 0 -> { }
                     default -> System.out.println("Opción fuera de rango.");
                 }
-            } catch (IllegalArgumentException | IllegalStateException ex) {
+            } catch (EntidadNoEncontradaException | IllegalArgumentException
+                     | IllegalStateException ex) {
                 System.out.println("No se pudo realizar la operación: " + ex.getMessage());
             }
         } while (opcion != 0);
