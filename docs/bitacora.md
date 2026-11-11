@@ -64,3 +64,11 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - **Estado:** **ejecutado y verificado en MySQL Workbench por el estudiante el 11/11/2026**. Se observaron resultados correctos de `CREATE TABLE` y `SHOW CREATE TABLE`, se listaron exactamente `categoria` y `producto`, y se confirmó que ambas tienen 0 registros. No se ha probado aún la conexión desde Java.
 - **Reglas de aplicación pendientes:** comprobar categoría activa al asignar productos y prohibir baja lógica de categorías con productos activos mediante DAO/servicios.
 - **Evidencia:** capturas de ejecución en MySQL Workbench compartidas durante la revisión.
+
+
+### DEC-008 — Diagnóstico inicial JDBC (11/11/2026)
+- **Decisión:** leer `src/META-INF/persistence.xml` con DOM del JDK en `config` y abrir conexiones con `java.sql` únicamente desde `dao`.
+- **Implementado:** `ConfiguracionDB`, `ConexionDB`, `ConexionService` y `PersistenciaException`; al iniciar se comprueba la conexión, y la opción 5 muestra unidad, URL y driver sin mostrar contraseña.
+- **Seguridad:** el repositorio publica solo `CAMBIAR_LOCALMENTE`. La credencial real se editará exclusivamente en `bin/META-INF/persistence.xml`, que está ignorado por Git; no debe guardarse en `src` ni compartirse por chat.
+- **Estado:** código publicado; instalación de driver indicada por el estudiante, pero ejecución JDBC y diagnóstico en su equipo **pendientes de prueba**. CRUD de categorías/productos y transacciones aún no implementados.
+- **Commits:** `Agregar configuración XML y conexión JDBC con manejo de errores`, `Integrar diagnóstico JDBC al inicio y opción de configuración`.

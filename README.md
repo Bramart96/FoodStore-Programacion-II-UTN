@@ -15,23 +15,33 @@ Trabajo Práctico Integrador de Programación II: aplicación de consola con Jav
 
 **Implementado y probado en el equipo del estudiante:** CRUD de usuarios en memoria mediante UsuarioRepository, UsuarioService y MenuUsuarios, con alta, listado, edición del correo, rechazo de duplicados, baja lógica y reinicio con memoria vacía.
 
-**Pendiente:** DAO y conexión JDBC, operaciones de categorías/productos, repositorios de pedidos y detalles, transacciones de stock, submenú de pedidos y pruebas integradas. No se afirma que el sistema ya gestione pedidos.
+**Implementado, pendiente de prueba local:** lectura DOM de persistence.xml, conexión JDBC, diagnóstico al iniciar y opción 5 del menú.
+
+**Pendiente:** CRUD JDBC de categorías/productos, repositorios de pedidos y detalles, transacciones de stock, menú de pedidos y pruebas integradas. No se afirma que el sistema ya gestione pedidos.
 
 ## Base de datos (instalación verificada)
 
 El archivo `db/01_esquema.sql` crea la base `foodstore_prog2` y las tablas `categoria` y `producto` para MySQL 8, sin eliminar registros. Su ejecución fue verificada en MySQL Workbench el 11/11/2026: ambas tablas creadas, definiciones consultadas y recuentos iniciales de 0 registros. **La conexión JDBC desde Java todavía está pendiente de implementar y probar.**
 
-## Ejecutar el bloque inicial
+## Compilar y ejecutar desde PowerShell (Windows)
 
-Requiere JDK 21. Desde la raíz, en terminal Bash o Git Bash:
+Requiere JDK 21 (o compilación con `--release 21` desde un JDK posterior), MySQL Server 8 en funcionamiento y el driver MySQL Connector/J `.jar` copiado a `lib/`.
 
-```bash
-mkdir -p bin
-javac -encoding UTF-8 -d bin $(find src -name '*.java')
-java -cp bin integrado.prog2.Main
+Desde la raíz del proyecto:
+
+```powershell
+New-Item -ItemType Directory -Path .\\bin\\META-INF -Force | Out-Null
+Copy-Item .\\src\\META-INF\\persistence.xml .\\bin\\META-INF\\persistence.xml -Force
+notepad .\\bin\\META-INF\\persistence.xml
+javac --release 21 -encoding UTF-8 -d bin (Get-ChildItem -Path .\\src -Recurse -Filter *.java | ForEach-Object { $_.FullName })
+java -cp "bin;lib/*" integrado.prog2.Main
 ```
 
-En etapas siguientes agregaremos el archivo `src/META-INF/persistence.xml`, el driver JDBC `.jar` en `lib/`, el script SQL propio en `db/` y las instrucciones definitivas para Windows/NetBeans.
+En el archivo local de `bin/META-INF/` cambiar únicamente los valores de usuario y contraseña si corresponde a la instalación. **No modificar el XML de `src/` con credenciales reales** porque está versionado; `bin/` queda excluido por .gitignore. Nunca compartir capturas de credenciales. Para posteriores ejecuciones no es necesario volver a copiar el XML (solo recompilar y ejecutar).
+
+## Estado de la conexión
+
+Al iniciar, la aplicación realiza una prueba JDBC, informa si hay acceso y muestra errores controlados si no encuentra el driver, la base o las credenciales. La opción 5 informa unidad y URL. La contraseña no se imprime. La conexión real debe comprobarse en el equipo del estudiante.
 
 ## Documentación y decisiones
 
