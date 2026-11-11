@@ -208,3 +208,10 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - Tras actualizar y recompilar, el estudiante consultó el historial usando el ID de usuario inexistente 999.
 - La aplicación informó el error mediante un mensaje controlado y regresó al menú, sin cerrarse ni mostrar stack trace.
 - **Validado:** captura de `EntidadNoEncontradaException` en `MenuPedidos`.
+
+
+### Verificación de unicidad de categoría activa
+- El estudiante intentó crear otra categoría con el nombre existente **Hamburguesas** y una descripción de prueba.
+- El sistema rechazó el duplicado mediante un mensaje controlado.
+- El listado continuó mostrando las cuatro categorías originales sin registros duplicados.
+- **Validado:** regla de unicidad entre categorías activas.
