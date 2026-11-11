@@ -59,3 +59,8 @@
 ### Persistencia diferencial confirmada — 11/11/2026
 - Tras reiniciar Java, usuarios y pedidos quedaron vacíos, mientras que el estudiante verificó el catálogo de 4 categorías y 8 productos, con stock 20 (Hamburguesa clásica) y 15 (doble cheddar).
 - Para la grabación, mostrar antes/después del reinicio como evidencia del almacenamiento mixto. La comprobación funcional ya se hizo; aún hay que filmarla.
+
+
+### Prueba de integridad del catálogo — 11/11/2026
+- Se intentó dar de baja la categoría Hamburguesas con dos productos activos; la operación fue rechazada y la categoría siguió activa.
+- Incluir como demostración breve de una validación de negocio del catálogo.
