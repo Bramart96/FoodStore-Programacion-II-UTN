@@ -195,3 +195,10 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - El estudiante comprobó desde Productos > Listar productos de una categoría que al seleccionar Hamburguesas se muestran exclusivamente Hamburguesa clásica y Hamburguesa doble cheddar, sin productos de otras categorías.
 - **Validado:** filtro de productos activos por categoría y asociación de catálogo.
 - Pendiente: probar reasignación temporal de un producto entre categorías y volver a su categoría original.
+
+
+### Reasignación de producto entre categorías
+- El estudiante comprobó desde el menú la reasignación de Agua mineral 500 ml (ID 6) desde Bebidas a Postres.
+- Verificó que el producto aparecía al consultar la categoría Postres.
+- Devolvió el producto a Bebidas y verificó que el catálogo quedó restaurado.
+- **Validado:** HU-PROD-04, actualización controlada de la categoría de un producto sin pérdida de datos.
