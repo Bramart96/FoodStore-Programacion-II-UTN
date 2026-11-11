@@ -234,3 +234,12 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - En el menú Usuarios, el estudiante creó un usuario ficticio, intentó editar el ID 999 y obtuvo el mensaje controlado: «No existe un usuario activo con ID 999».
 - La aplicación regresó al submenú sin cerrar ni mostrar stack trace.
 - Validada la captura de `EntidadNoEncontradaException` incorporada en `MenuUsuarios`.
+
+
+### Auditoría estática del modelo y validaciones nulas
+- Se revisaron las entidades Base, Categoria, Producto, Usuario, Pedido y DetallePedido y los contratos Calculable y GenericDAO.
+- Se constató que las relaciones del modelo se mantienen unidireccionales; Pedido implementa Calculable y declara los tres métodos requeridos por el UML.
+- Las entidades validan varios argumentos nulos antes de acceder a sus miembros; las listas de agregación se inicializan con ArrayList.
+- Se identificó una posible NullPointerException por uso de un borrador nulo al llamar directamente al servicio desde fuera del menú. Se añadieron controles explícitos con IllegalArgumentException en agregarDetalle, cambiarCantidad y eliminarDetalle.
+- En los DAO JDBC, los timestamps recuperados dependen de que el esquema aplicado respete las restricciones NOT NULL de created_at; bajo el esquema oficial quedan garantizados.
+- **Estado:** inspección estática y corrección publicadas. La compilación posterior al ajuste de null sigue pendiente de comprobación local. No se afirma inmunidad absoluta a NullPointerException.
