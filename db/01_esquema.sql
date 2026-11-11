@@ -1,7 +1,7 @@
 -- Food Store | Trabajo Practico Integrador - Programacion II (UTN)
--- Instalacion para MySQL 8: base independiente del TFI de Bases de Datos I.
--- Basado en el modelo validado del dominio: categoria (1) -> (N) producto.
--- No elimina tablas ni datos, y no modifica el esquema de Bases de Datos I.
+-- Instalacion para MySQL 8: esquema foodstore_prog2.
+-- Modelo relacional: categoria (1) -> (N) producto.
+-- El script no elimina tablas ni registros existentes.
 -- Diseñado para una instalacion nueva; no corrige tablas preexistentes distintas.
 
 CREATE DATABASE IF NOT EXISTS foodstore_prog2

@@ -9,19 +9,17 @@ Trabajo Práctico Integrador de Programación II: aplicación de consola con Jav
 - Bajas lógicas, excepciones propias, cálculo de pedidos y transacciones para stock.
 - Sin Maven, Gradle, JPA ni Hibernate.
 
-Este repositorio es **exclusivo de Programación II**. Bases de Datos I utiliza el mismo dominio en otro repositorio académico, sin compartir código ni base de datos de ejecución.
-
 ## Estado del desarrollo — 11/11/2026
 
 **Implementado y compilado en entorno de asistencia:** `Base`, enums `Rol`, `Estado`, `FormaPago`, interfaz `Calculable`, las cinco entidades (`Categoria`, `Producto`, `Usuario`, `Pedido`, `DetallePedido`), excepciones de precio y stock y Main provisional. Las entidades se probaron en el entorno de asistencia; falta prueba local.
 
-**Implementado y probado en asistencia:** CRUD de usuarios en memoria mediante UsuarioRepository, UsuarioService y MenuUsuarios, con alta, búsqueda, edición, baja lógica, IDs y email único. Falta prueba en el equipo del estudiante.
+**Implementado y probado en el equipo del estudiante:** CRUD de usuarios en memoria mediante UsuarioRepository, UsuarioService y MenuUsuarios, con alta, listado, edición del correo, rechazo de duplicados, baja lógica y reinicio con memoria vacía.
 
 **Pendiente:** DAO y conexión JDBC, operaciones de categorías/productos, repositorios de pedidos y detalles, transacciones de stock, submenú de pedidos y pruebas integradas. No se afirma que el sistema ya gestione pedidos.
 
-## Base de datos (preparada, pendiente de prueba)
+## Base de datos (instalación verificada)
 
-El archivo `db/01_esquema.sql` crea `foodstore_prog2` y únicamente las tablas `categoria` y `producto` para MySQL 8. Es independiente de `foodstore_bdi` y no elimina datos. Abrirlo en MySQL Workbench y ejecutarlo sobre una instalación nueva. Verificar la estructura con `SHOW CREATE TABLE`. **La conexión JDBC todavía está pendiente**.
+El archivo `db/01_esquema.sql` crea la base `foodstore_prog2` y las tablas `categoria` y `producto` para MySQL 8, sin eliminar registros. Su ejecución fue verificada en MySQL Workbench el 11/11/2026: ambas tablas creadas, definiciones consultadas y recuentos iniciales de 0 registros. **La conexión JDBC desde Java todavía está pendiente de implementar y probar.**
 
 ## Ejecutar el bloque inicial
 

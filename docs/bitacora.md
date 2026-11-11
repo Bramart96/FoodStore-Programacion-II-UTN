@@ -2,11 +2,9 @@
 
 ## 11/11/2026 — Inicio del desarrollo
 
-**Contexto:** Bases de Datos I es un trabajo académico independiente. Para mantener coherencia se revisaron `sql/01_esquema.sql` y el informe técnico de ese repositorio, que documentan MySQL 8 y las tablas `categoria` y `producto`.
-
 ### DEC-001 — Plataforma y persistencia
-- **Decisión:** Java 21 y JDBC puro conforme a consigna; MySQL 8 como motor de trabajo, con una base propia para Programación II.
-- **Justificación:** respeta el alcance y conserva coherencia en los nombres y restricciones con el TFI de Bases de Datos I.
+- **Decisión:** Java 21, JDBC puro y MySQL 8, con el esquema de aplicación `foodstore_prog2`.
+- **Justificación:** tecnología permitida por la consigna; permite CRUD persistente y pruebas de integridad.
 - **Estado:** decidida; conexión todavía no implementada ni probada.
 
 ### DEC-002 — Modelo y UML
@@ -58,11 +56,11 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 
 ## 11/11/2026 — Preparación del esquema relacional de Programación II
 
-### DEC-007 — Base independiente de Bases de Datos I
-- **Decisión:** utilizar `foodstore_prog2` en MySQL 8, con las tablas `categoria` y `producto`, conservando nombres, tipos y restricciones compatibles con el modelo documentado en Bases de Datos I.
-- **Motivo:** separar pruebas y datos de cada trabajo integrador sin perder coherencia del dominio.
+### DEC-007 — Esquema relacional para JDBC
+- **Decisión:** utilizar `foodstore_prog2` en MySQL 8 con las tablas `categoria` y `producto` y una relación 1:N mediante `producto.categoria_id`.
+- **Motivo:** implementar la persistencia requerida para el CRUD y las transacciones de stock.
 - **Archivo:** `db/01_esquema.sql`.
-- **Seguridad:** el instalador usa `CREATE DATABASE IF NOT EXISTS` y `CREATE TABLE IF NOT EXISTS`; no ejecuta `DROP` ni `DELETE`. No modifica `foodstore_bdi`.
-- **Estado:** script preparado y publicado. **No ejecutado ni verificado aún en MySQL Workbench del estudiante**.
+- **Seguridad:** el instalador usa `CREATE DATABASE IF NOT EXISTS` y `CREATE TABLE IF NOT EXISTS`; no ejecuta `DROP` ni `DELETE`.
+- **Estado:** **ejecutado y verificado en MySQL Workbench por el estudiante el 11/11/2026**. Se observaron resultados correctos de `CREATE TABLE` y `SHOW CREATE TABLE`, se listaron exactamente `categoria` y `producto`, y se confirmó que ambas tienen 0 registros. No se ha probado aún la conexión desde Java.
 - **Reglas de aplicación pendientes:** comprobar categoría activa al asignar productos y prohibir baja lógica de categorías con productos activos mediante DAO/servicios.
-- **Commit:** `Agregar esquema MySQL independiente para Food Store`.
+- **Evidencia:** capturas de ejecución en MySQL Workbench compartidas durante la revisión.
