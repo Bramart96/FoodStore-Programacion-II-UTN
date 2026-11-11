@@ -167,3 +167,9 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - En el historial del usuario ID 1 solo aparece el pedido anterior, ID 1, CANCELADO y con BAJA LÓGICA, total $17000, detalle de dos Hamburguesas clásicas señalado [DETALLE ELIMINADO].
 - El pedido rechazado de $20500 **no aparece en el historial**. Resultado: rollback completo, sin registro indebido en memoria.
 - **Próxima prueba:** reinicio y comprobación de persistencia diferencial: catálogo en MySQL sí, usuarios/pedidos en memoria no.
+
+
+### Reinicio de la aplicación: colecciones en memoria — 11/11/2026
+- Tras cerrar y volver a ejecutar el programa, el estudiante comprobó que **no hay usuarios ni pedidos en memoria**.
+- Resultado validado para la parte no persistida del diseño mixto.
+- Pendiente de comprobar tras el mismo reinicio: categorías y productos permanecen almacenados en MySQL.
