@@ -114,3 +114,11 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - El estudiante confirmó el alta y listado correctos de cuatro categorías de ejemplo desde el menú Java.
 - **Estado:** pruebas locales positivas de los casos indicados; faltan pruebas de límites, mensajes de error adicionales y confirmación visual de las asociaciones de productos.
 - **Siguiente paso:** cargar productos desde el menú JDBC, comprobar asociación por categoría, persistencia, edición, reasignación y baja lógica; no cargar datos desde Workbench.
+
+
+### Carga del catálogo y corrección pendiente — 11/11/2026
+- **Carga informada por el estudiante:** ocho productos ingresados desde la aplicación en las cuatro categorías previamente creadas.
+- **Validaciones:** el estudiante informó resultados satisfactorios de las pruebas realizadas sobre la carga de productos. No se considera verificada por ello toda la batería de edición, reasignación, baja lógica y persistencia después de reiniciar.
+- **Dato a corregir:** Flan casero se cargó con precio 10, técnicamente válido pero distinto del precio de demostración previsto (4000).
+- **Acción indicada:** modificar únicamente el precio a 4000 mediante Productos > Editar; conservar los demás campos y verificar el listado. Corrección aún pendiente de confirmación.
+- **Estado:** carga y validaciones informadas como satisfactorias; auditoría final de las historias de Producto y pedidos todavía pendiente.
