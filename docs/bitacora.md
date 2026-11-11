@@ -250,3 +250,10 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - En revisión de código: PedidoService solo permite cambiar la forma de pago de pedidos confirmados; los pedidos CANCELADO y TERMINADO no admiten cambios.
 - **Pendiente de validación local específica:** cambiar forma de pago de un pedido confirmado y corroborar que la modificación no altera el stock. La cancelación y reposición ya fueron verificadas.
 - La documentación definitiva se simplificará en la etapa de cierre: fechas internas y guion de video no formarán parte de la entrega.
+
+
+### Cambio de forma de pago en pedido confirmado
+- El estudiante creó un pedido ID 1 con una Hamburguesa clásica (1 unidad), total $8500, y lo confirmó con forma de pago EFECTIVO.
+- Cambió la forma de pago a TARJETA desde el menú Pedidos y comprobó en el listado que se conservaban el estado CONFIRMADO, el producto, la cantidad y el total de $8500.
+- **Validado:** cambio de forma de pago del pedido confirmado (HU-PED-03).
+- **Pendiente de cierre de esta prueba:** cancelar este pedido y verificar la reposición de la unidad descontada (stock de Hamburguesa clásica de 19 a 20).
