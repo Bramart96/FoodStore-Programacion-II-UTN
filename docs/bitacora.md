@@ -181,3 +181,11 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - Stocks verificados tras reinicio: Hamburguesa clásica (ID 1) = **20** y Hamburguesa doble cheddar (ID 2) = **15**.
 - **Resultado validado:** entidades Usuario y Pedido en memoria volátil; Categoria y Producto persistidos en MySQL.
 - **Siguiente prueba pendiente:** impedir la baja lógica de una categoría que conserva productos activos.
+
+
+### Integridad de categoría con productos activos — 11/11/2026
+- Desde Categorías > Eliminar (baja lógica), el estudiante intentó dar de baja la categoría Hamburguesas con dos productos activos.
+- La aplicación rechazó la baja con el control de integridad previsto.
+- Confirmó que la categoría seguía apareciendo en el listado de activas.
+- **Validado:** bloqueo de baja lógica de categoría con productos vinculados.
+- **Próxima prueba:** filtro de productos por categoría y reasignación controlada.
