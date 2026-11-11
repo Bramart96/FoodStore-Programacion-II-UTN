@@ -257,3 +257,9 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - Cambió la forma de pago a TARJETA desde el menú Pedidos y comprobó en el listado que se conservaban el estado CONFIRMADO, el producto, la cantidad y el total de $8500.
 - **Validado:** cambio de forma de pago del pedido confirmado (HU-PED-03).
 - **Pendiente de cierre de esta prueba:** cancelar este pedido y verificar la reposición de la unidad descontada (stock de Hamburguesa clásica de 19 a 20).
+
+
+### Cierre de prueba de modificación de pago y cancelación
+- Tras cambiar de EFECTIVO a TARJETA un pedido confirmado de una Hamburguesa clásica (ID 1, una unidad, total $8500), el estudiante verificó la forma de pago actualizada y la conservación del estado, la cantidad y el total.
+- Posteriormente canceló el mismo pedido y comprobó que el stock de Hamburguesa clásica se restituyó de 19 a 20 unidades.
+- **Validado:** modificación de forma de pago, cancelación y restitución del stock sin alterar los datos del producto.
