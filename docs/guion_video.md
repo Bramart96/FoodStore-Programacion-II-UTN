@@ -34,3 +34,12 @@
 9. Cierre, repositorio y documentación.
 
 **Precauciones:** no mostrar contraseñas, emails o teléfonos reales. No crear tablas de usuario/pedido/detalle. No confundir pruebas ya realizadas con pendientes. Mostrar capturas claras del menú, de Workbench y de los resultados.
+
+
+## Evidencia nueva para la demostración — ROLLBACK (11/11/2026)
+- Borrador: hamburguesa clásica ID 1 y hamburguesa doble cheddar ID 2, una unidad de cada una, total $20500.
+- Stock real al preparar el pedido: 20 y 15.
+- Simulación de venta concurrente: ID 2 pasó temporalmente a stock 0 desde Workbench.
+- La confirmación rechazó el pedido por stock insuficiente del ID 2.
+- La consulta posterior confirmó ID 1 = 20, ID 2 = 0: transacción sin descuento parcial, rollback verificado.
+- Antes de grabar, mostrar el caso con orden y sin revelar configuración de credenciales. **Pendiente**: restaurar ID 2 = 15 y comprobar que el pedido fallido no quedó en memoria.
