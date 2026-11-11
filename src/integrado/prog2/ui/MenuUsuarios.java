@@ -5,6 +5,7 @@ import integrado.prog2.enums.Rol;
 import integrado.prog2.service.UsuarioService;
 import java.util.List;
 import java.util.Scanner;
+import integrado.prog2.validation.ValidacionTexto;
 
 /** Menú CRUD de usuarios; solo interactúa con la consola. */
 public class MenuUsuarios {
@@ -55,8 +56,8 @@ public class MenuUsuarios {
 
     private void crear() {
         System.out.println("\n--- CREAR USUARIO [MEMORIA] ---");
-        String nombre = leerTexto("Nombre: ");
-        String apellido = leerTexto("Apellido: ");
+        String nombre = leerNombre("Nombre: ", "nombre del usuario");
+        String apellido = leerNombre("Apellido: ", "apellido del usuario");
         String mail = leerTexto("Email: ");
         String celular = leerTexto("Celular: ");
         String contrasena = leerTexto("Contraseña: ");
@@ -77,8 +78,8 @@ public class MenuUsuarios {
         System.out.println("4) Celular  5) Contraseña 6) Rol   0) Cancelar");
         int opcion = leerEntero("Campo: ");
         switch (opcion) {
-            case 1 -> servicio.cambiarNombre(id, leerTexto("Nuevo nombre: "));
-            case 2 -> servicio.cambiarApellido(id, leerTexto("Nuevo apellido: "));
+            case 1 -> servicio.cambiarNombre(id, leerNombre("Nuevo nombre: ", "nombre del usuario"));
+            case 2 -> servicio.cambiarApellido(id, leerNombre("Nuevo apellido: ", "apellido del usuario"));
             case 3 -> servicio.cambiarMail(id, leerTexto("Nuevo email: "));
             case 4 -> servicio.cambiarCelular(id, leerTexto("Nuevo celular: "));
             case 5 -> servicio.cambiarContrasena(id, leerTexto("Nueva contraseña: "));
@@ -126,6 +127,17 @@ public class MenuUsuarios {
     private String leerTexto(String etiqueta) {
         System.out.print(etiqueta);
         return scanner.nextLine();
+    }
+
+    private String leerNombre(String etiqueta, String campo) {
+        while (true) {
+            String valor = leerTexto(etiqueta);
+            try {
+                return ValidacionTexto.obligatorio(valor, campo, 100);
+            } catch (IllegalArgumentException ex) {
+                System.out.println("Dato inválido: " + ex.getMessage());
+            }
+        }
     }
 
     private int leerEntero(String etiqueta) {
