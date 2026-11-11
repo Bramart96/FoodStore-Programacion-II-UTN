@@ -69,7 +69,6 @@ public class CategoriaDAO implements GenericDAO<Categoria> {
         }
     }
 
-    @Override
     public Categoria insertar(Categoria categoria) {
         if (categoria == null || categoria.getId() != null) {
             throw new IllegalArgumentException("Debe indicar una categoría nueva.");
