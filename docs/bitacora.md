@@ -54,3 +54,15 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - **Prueba realizada en entorno de asistencia:** compilación con JDK 21; alta con ID, listado, correo duplicado rechazado, edición de correo, baja lógica y listado vacío posterior. Resultado satisfactorio. No se ha probado todavía en el equipo del estudiante.
 - **Pendiente:** comprobación manual del usuario; CRUD de pedidos, JDBC, transacciones y menús de categorías/productos.
 - **Commits:** `Implementar repositorio y servicio de usuarios en memoria`, `Agregar menú CRUD de usuarios y actualizar Main`.
+
+
+## 11/11/2026 — Preparación del esquema relacional de Programación II
+
+### DEC-007 — Base independiente de Bases de Datos I
+- **Decisión:** utilizar `foodstore_prog2` en MySQL 8, con las tablas `categoria` y `producto`, conservando nombres, tipos y restricciones compatibles con el modelo documentado en Bases de Datos I.
+- **Motivo:** separar pruebas y datos de cada trabajo integrador sin perder coherencia del dominio.
+- **Archivo:** `db/01_esquema.sql`.
+- **Seguridad:** el instalador usa `CREATE DATABASE IF NOT EXISTS` y `CREATE TABLE IF NOT EXISTS`; no ejecuta `DROP` ni `DELETE`. No modifica `foodstore_bdi`.
+- **Estado:** script preparado y publicado. **No ejecutado ni verificado aún en MySQL Workbench del estudiante**.
+- **Reglas de aplicación pendientes:** comprobar categoría activa al asignar productos y prohibir baja lógica de categorías con productos activos mediante DAO/servicios.
+- **Commit:** `Agregar esquema MySQL independiente para Food Store`.

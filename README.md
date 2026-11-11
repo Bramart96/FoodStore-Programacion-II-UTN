@@ -19,6 +19,10 @@ Este repositorio es **exclusivo de Programación II**. Bases de Datos I utiliza 
 
 **Pendiente:** DAO y conexión JDBC, operaciones de categorías/productos, repositorios de pedidos y detalles, transacciones de stock, submenú de pedidos y pruebas integradas. No se afirma que el sistema ya gestione pedidos.
 
+## Base de datos (preparada, pendiente de prueba)
+
+El archivo `db/01_esquema.sql` crea `foodstore_prog2` y únicamente las tablas `categoria` y `producto` para MySQL 8. Es independiente de `foodstore_bdi` y no elimina datos. Abrirlo en MySQL Workbench y ejecutarlo sobre una instalación nueva. Verificar la estructura con `SHOW CREATE TABLE`. **La conexión JDBC todavía está pendiente**.
+
 ## Ejecutar el bloque inicial
 
 Requiere JDK 21. Desde la raíz, en terminal Bash o Git Bash:
