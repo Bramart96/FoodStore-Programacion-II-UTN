@@ -15,7 +15,9 @@ Este repositorio es **exclusivo de Programación II**. Bases de Datos I utiliza 
 
 **Implementado y compilado en entorno de asistencia:** `Base`, enums `Rol`, `Estado`, `FormaPago`, interfaz `Calculable`, las cinco entidades (`Categoria`, `Producto`, `Usuario`, `Pedido`, `DetallePedido`), excepciones de precio y stock y Main provisional. Las entidades se probaron en el entorno de asistencia; falta prueba local.
 
-**Pendiente:** DAO, conexión JDBC, repositorios para generar IDs y controlar unicidad, servicios y transacciones de stock, menús y pruebas integradas. Las tres entidades de memoria ya están codificadas, pero aún no constituyen un CRUD funcional. No se afirma que el sistema ya gestione pedidos.
+**Implementado y probado en asistencia:** CRUD de usuarios en memoria mediante UsuarioRepository, UsuarioService y MenuUsuarios, con alta, búsqueda, edición, baja lógica, IDs y email único. Falta prueba en el equipo del estudiante.
+
+**Pendiente:** DAO y conexión JDBC, operaciones de categorías/productos, repositorios de pedidos y detalles, transacciones de stock, submenú de pedidos y pruebas integradas. No se afirma que el sistema ya gestione pedidos.
 
 ## Ejecutar el bloque inicial
 
