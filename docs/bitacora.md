@@ -202,3 +202,9 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - Verificó que el producto aparecía al consultar la categoría Postres.
 - Devolvió el producto a Bebidas y verificó que el catálogo quedó restaurado.
 - **Validado:** HU-PROD-04, actualización controlada de la categoría de un producto sin pérdida de datos.
+
+
+### Verificación de ID inexistente en el menú de pedidos
+- Tras actualizar y recompilar, el estudiante consultó el historial usando el ID de usuario inexistente 999.
+- La aplicación informó el error mediante un mensaje controlado y regresó al menú, sin cerrarse ni mostrar stack trace.
+- **Validado:** captura de `EntidadNoEncontradaException` en `MenuPedidos`.
