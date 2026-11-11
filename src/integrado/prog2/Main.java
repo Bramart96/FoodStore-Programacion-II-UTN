@@ -4,22 +4,27 @@ import integrado.prog2.config.ConfiguracionDB;
 import integrado.prog2.dao.ConexionDB;
 import integrado.prog2.dao.CategoriaDAO;
 import integrado.prog2.dao.ProductoDAO;
+import integrado.prog2.dao.StockDAO;
 import integrado.prog2.exception.PersistenciaException;
 import integrado.prog2.repository.UsuarioRepository;
+import integrado.prog2.repository.PedidoRepository;
 import integrado.prog2.service.ConexionService;
 import integrado.prog2.service.CategoriaService;
 import integrado.prog2.service.ProductoService;
+import integrado.prog2.service.PedidoService;
 import integrado.prog2.service.UsuarioService;
 import integrado.prog2.ui.MenuUsuarios;
 import integrado.prog2.ui.MenuCategorias;
 import integrado.prog2.ui.MenuProductos;
+import integrado.prog2.ui.MenuPedidos;
 import java.util.Scanner;
 
 /** Punto de entrada del sistema. La interacción se mantiene en consola. */
 public class Main {
 
     public static void main(String[] args) {
-        UsuarioService usuarios = new UsuarioService(new UsuarioRepository());
+        UsuarioRepository usuariosRepository = new UsuarioRepository();
+        UsuarioService usuarios = new UsuarioService(usuariosRepository);
         ConexionService conexionService = new ConexionService(new ConexionDB());
 
         ConfiguracionDB configuracion = null;
@@ -41,13 +46,19 @@ public class Main {
                     : new MenuProductos(scanner,
                             new ProductoService(new ProductoDAO(new ConexionDB(), configuracion),
                                     new CategoriaDAO(new ConexionDB(), configuracion)));
+            MenuPedidos menuPedidos = configuracion == null ? null
+                    : new MenuPedidos(scanner,
+                            new PedidoService(usuariosRepository,
+                                    new PedidoRepository(usuariosRepository),
+                                    new ProductoDAO(new ConexionDB(), configuracion),
+                                    new StockDAO(new ConexionDB(), configuracion)));
             int opcion;
             do {
                 System.out.println("\n=== FOOD STORE | PROGRAMACION II ===");
                 System.out.println("1) Categorías ............ [BASE DE DATOS]");
                 System.out.println("2) Productos ............. [BASE DE DATOS]");
                 System.out.println("3) Usuarios .............. [MEMORIA]");
-                System.out.println("4) Pedidos y detalles .... [MEMORIA] (pendiente)");
+                System.out.println("4) Pedidos y detalles .... [MEMORIA]");
                 System.out.println("5) Ver configuración de conexión");
                 System.out.println("0) Salir");
                 opcion = leerOpcion(scanner);
@@ -68,7 +79,13 @@ public class Main {
                     }
                     case 3 -> menuUsuarios.mostrar();
                     case 5 -> mostrarConfiguracion(configuracion);
-                    case 4 -> System.out.println("Esta función todavía no está implementada.");
+                    case 4 -> {
+                        if (menuPedidos == null) {
+                            System.out.println("No se pudo cargar la configuración JDBC para gestionar stock.");
+                        } else {
+                            menuPedidos.mostrar();
+                        }
+                    }
                     case 0 -> System.out.println("Fin del programa. Los datos en memoria se descartaron.");
                     default -> System.out.println("Opción fuera de rango.");
                 }
