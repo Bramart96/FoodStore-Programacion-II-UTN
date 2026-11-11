@@ -99,3 +99,12 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - **Restricciones:** SQL parametrizado solo en DAO, categoría activa obligatoria, precio/stock no negativos mediante validaciones de la entidad. La columna `categoria_id` no aparece en Producto.java.
 - **Estado:** código publicado en GitHub. **Compilación y pruebas con JDBC en la computadora del estudiante pendientes**, sin afirmar funcionalidad verificada.
 - **Commits:** `Implementar operaciones JDBC de productos y adaptar contrato DAO`, `Agregar servicio y menú de gestión de productos`, `Habilitar el menú de productos desde Main`.
+
+### DEC-011 — Validaciones básicas y preparación de carga limpia (11/11/2026)
+- **Problema detectado en consola:** el alta de Producto admitía valores compuestos solo por números en campos textuales.
+- **Cambio implementado:** `ValidacionTexto` comprueba campos obligatorios, límite de caracteres, caracteres de control y presencia de letras; se integró a Categoría, Producto y nombres/apellidos de Usuario. El menú vuelve a pedir los campos textuales inválidos.
+- **Criterio:** nombres como `7UP` se admiten, pero `2323` o cadenas de símbolos no se aceptan como nombre o descripción. Precio y stock siguen admitiendo números válidos. Imagen es opcional.
+- **Estado:** código publicado en GitHub; pendiente la prueba de esta nueva versión en el equipo del estudiante.
+- **Preparación de datos:** el estudiante confirmó que limpió `foodstore_prog2` para volver a cargar categorías y productos desde Java. La consulta de recuentos posterior a la limpieza no fue mostrada en esta conversación.
+- **Próximas pruebas:** `git pull`, compilar, probar rechazo de campos numéricos, crear categorías reales, registrar productos y verificar persistencia.
+- **Commits de código:** `Validar campos de texto en categorías, productos y usuarios` y `Mejorar la validación inmediata de nombres en el menú de usuarios`.
