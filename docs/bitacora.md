@@ -215,3 +215,9 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - El sistema rechazó el duplicado mediante un mensaje controlado.
 - El listado continuó mostrando las cuatro categorías originales sin registros duplicados.
 - **Validado:** regla de unicidad entre categorías activas.
+
+
+### Rechazo de stock negativo en edición de producto
+- El estudiante intentó editar Hamburguesa clásica (ID 1), dejando los demás campos sin cambios e ingresando stock `-5`.
+- La aplicación rechazó el valor inválido y el listado posterior conservó el stock de **20** unidades.
+- **Validado:** no se almacena stock negativo ni se altera el registro ante este error.
