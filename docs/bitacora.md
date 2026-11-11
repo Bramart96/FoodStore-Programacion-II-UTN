@@ -24,10 +24,17 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 
 ### Pruebas
 - **Compilación y ejecución:** comprobadas en el entorno de asistencia con `javac 21.0.12.1`, mostrando el mensaje de inicialización.
-- **Verificación en equipo del estudiante:** pendiente.
+- **Verificación en equipo del estudiante:** realizada y confirmada el 11/11/2026 desde Windows PowerShell con Java 25, compilando con `javac --release 21` y ejecutando el Main inicial.
+- **Modelo Categoria y Producto:** clases y excepciones de validación compiladas con JDK 21 y probadas en el entorno de asistencia (nombre, agregación, lista protegida, precio/stock inválidos, igualdad por ID y toString). Pendiente prueba local del estudiante.
 - **Conexión, CRUD y transacciones:** pendientes de implementación y prueba.
 
 ### Registro Git
 - `Iniciar repositorio de Food Store`: README inicial.
 - `Agregar clase Base, enumeraciones y contrato Calculable`: modelo base.
 - `Organizar punto de entrada y registrar decisiones iniciales`: Main, .gitignore, README y bitácora.
+- `Agregar Categoria y Producto con validaciones del modelo`: entidades y excepciones; igualdad en Base.
+
+### DEC-004 — Entidades persistentes y validaciones
+- **Decisión:** implementar Categoria y Producto según UML; `categoria_id` pertenece al DAO y `nombre_activo` al esquema SQL, no a las entidades Java.
+- **Detalle:** Categoria expone una lista no modificable de productos; Producto valida precio, stock y disponibilidad. Base compara por ID cuando existe.
+- **Estado:** implementado y probado en asistencia; prueba local pendiente.

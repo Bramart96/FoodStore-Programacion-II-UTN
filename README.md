@@ -13,9 +13,9 @@ Este repositorio es **exclusivo de Programación II**. Bases de Datos I utiliza 
 
 ## Estado del desarrollo — 11/11/2026
 
-**Implementado y compilado:** `Base`, enums `Rol`, `Estado`, `FormaPago`, interfaz `Calculable` y Main provisional.
+**Implementado y compilado:** `Base`, enums `Rol`, `Estado`, `FormaPago`, interfaz `Calculable`, entidades `Categoria` y `Producto`, excepciones de precio y stock y Main provisional. Las entidades se probaron en el entorno de asistencia; falta prueba local.
 
-**Pendiente:** entidades concretas, DAO, conexión JDBC, colecciones, servicios, menús y pruebas funcionales. No se afirma que el sistema ya gestione pedidos.
+**Pendiente:** entidades `Usuario`, `Pedido`, `DetallePedido`, DAO, conexión JDBC, colecciones, servicios, menús y pruebas funcionales. No se afirma que el sistema ya gestione pedidos.
 
 ## Ejecutar el bloque inicial
 
