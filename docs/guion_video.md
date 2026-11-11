@@ -64,3 +64,7 @@
 ### Prueba de integridad del catálogo — 11/11/2026
 - Se intentó dar de baja la categoría Hamburguesas con dos productos activos; la operación fue rechazada y la categoría siguió activa.
 - Incluir como demostración breve de una validación de negocio del catálogo.
+
+
+### Filtro de productos por categoría validado — 11/11/2026
+- La consulta por categoría Hamburguesas mostró solamente los dos productos correspondientes. Preparar para el video una demostración breve del filtro y la asociación unidireccional Categoria -> Productos.
