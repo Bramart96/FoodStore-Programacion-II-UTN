@@ -189,3 +189,9 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - Confirmó que la categoría seguía apareciendo en el listado de activas.
 - **Validado:** bloqueo de baja lógica de categoría con productos vinculados.
 - **Próxima prueba:** filtro de productos por categoría y reasignación controlada.
+
+
+### Consulta de productos por categoría — 11/11/2026
+- El estudiante comprobó desde Productos > Listar productos de una categoría que al seleccionar Hamburguesas se muestran exclusivamente Hamburguesa clásica y Hamburguesa doble cheddar, sin productos de otras categorías.
+- **Validado:** filtro de productos activos por categoría y asociación de catálogo.
+- Pendiente: probar reasignación temporal de un producto entre categorías y volver a su categoría original.
