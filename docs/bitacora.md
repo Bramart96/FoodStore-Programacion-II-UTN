@@ -243,3 +243,10 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - Se identificó una posible NullPointerException por uso de un borrador nulo al llamar directamente al servicio desde fuera del menú. Se añadieron controles explícitos con IllegalArgumentException en agregarDetalle, cambiarCantidad y eliminarDetalle.
 - En los DAO JDBC, los timestamps recuperados dependen de que el esquema aplicado respete las restricciones NOT NULL de created_at; bajo el esquema oficial quedan garantizados.
 - **Estado:** inspección estática y corrección publicadas. La compilación posterior al ajuste de null sigue pendiente de comprobación local. No se afirma inmunidad absoluta a NullPointerException.
+
+
+### Recompilación y revisión de reglas pendientes
+- El estudiante actualizó desde GitHub y confirmó compilación sin errores usando `javac --release 21`, luego del control contra borradores nulos.
+- En revisión de código: PedidoService solo permite cambiar la forma de pago de pedidos confirmados; los pedidos CANCELADO y TERMINADO no admiten cambios.
+- **Pendiente de validación local específica:** cambiar forma de pago de un pedido confirmado y corroborar que la modificación no altera el stock. La cancelación y reposición ya fueron verificadas.
+- La documentación definitiva se simplificará en la etapa de cierre: fechas internas y guion de video no formarán parte de la entrega.
