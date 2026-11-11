@@ -221,3 +221,10 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - El estudiante intentó editar Hamburguesa clásica (ID 1), dejando los demás campos sin cambios e ingresando stock `-5`.
 - La aplicación rechazó el valor inválido y el listado posterior conservó el stock de **20** unidades.
 - **Validado:** no se almacena stock negativo ni se altera el registro ante este error.
+
+
+### Comprobación de modificación y baja lógica de detalles
+- Se inició un borrador con dos Hamburguesas clásicas a $8500 cada una.
+- El estudiante modificó la cantidad de 2 a 3; la pantalla confirmó un total de **$25500** (captura aportada).
+- También confirmó que quitar el detalle funcionó y que el resumen volvió a quedar sin detalles activos (total $0).
+- **Validado:** modificación de cantidad, recálculo de total y baja lógica de detalles de un pedido sin confirmar.
