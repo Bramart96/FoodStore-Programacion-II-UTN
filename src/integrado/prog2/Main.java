@@ -2,11 +2,14 @@ package integrado.prog2;
 
 import integrado.prog2.config.ConfiguracionDB;
 import integrado.prog2.dao.ConexionDB;
+import integrado.prog2.dao.CategoriaDAO;
 import integrado.prog2.exception.PersistenciaException;
 import integrado.prog2.repository.UsuarioRepository;
 import integrado.prog2.service.ConexionService;
+import integrado.prog2.service.CategoriaService;
 import integrado.prog2.service.UsuarioService;
 import integrado.prog2.ui.MenuUsuarios;
+import integrado.prog2.ui.MenuCategorias;
 import java.util.Scanner;
 
 /** Punto de entrada del sistema. La interacción se mantiene en consola. */
@@ -28,10 +31,13 @@ public class Main {
 
         try (Scanner scanner = new Scanner(System.in)) {
             MenuUsuarios menuUsuarios = new MenuUsuarios(scanner, usuarios);
+            MenuCategorias menuCategorias = configuracion == null ? null
+                    : new MenuCategorias(scanner,
+                            new CategoriaService(new CategoriaDAO(new ConexionDB(), configuracion)));
             int opcion;
             do {
                 System.out.println("\n=== FOOD STORE | PROGRAMACION II ===");
-                System.out.println("1) Categorías ............ [BASE DE DATOS] (pendiente)");
+                System.out.println("1) Categorías ............ [BASE DE DATOS]");
                 System.out.println("2) Productos ............. [BASE DE DATOS] (pendiente)");
                 System.out.println("3) Usuarios .............. [MEMORIA]");
                 System.out.println("4) Pedidos y detalles .... [MEMORIA] (pendiente)");
@@ -39,9 +45,16 @@ public class Main {
                 System.out.println("0) Salir");
                 opcion = leerOpcion(scanner);
                 switch (opcion) {
+                    case 1 -> {
+                        if (menuCategorias == null) {
+                            System.out.println("No se pudo cargar la configuración JDBC.");
+                        } else {
+                            menuCategorias.mostrar();
+                        }
+                    }
                     case 3 -> menuUsuarios.mostrar();
                     case 5 -> mostrarConfiguracion(configuracion);
-                    case 1, 2, 4 -> System.out.println("Esta función todavía no está implementada.");
+                    case 2, 4 -> System.out.println("Esta función todavía no está implementada.");
                     case 0 -> System.out.println("Fin del programa. Los datos en memoria se descartaron.");
                     default -> System.out.println("Opción fuera de rango.");
                 }
