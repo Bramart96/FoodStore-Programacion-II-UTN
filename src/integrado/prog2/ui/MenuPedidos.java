@@ -7,6 +7,7 @@ import integrado.prog2.entities.Usuario;
 import integrado.prog2.enums.Estado;
 import integrado.prog2.enums.FormaPago;
 import integrado.prog2.service.PedidoService;
+import integrado.prog2.exception.PersistenciaException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -50,7 +51,7 @@ public class MenuPedidos {
                     case 0 -> { }
                     default -> System.out.println("Opción fuera de rango.");
                 }
-            } catch (IllegalArgumentException | IllegalStateException ex) {
+            } catch (PersistenciaException | IllegalArgumentException | IllegalStateException ex) {
                 System.out.println("No se pudo realizar la operación: " + ex.getMessage());
             }
         } while (opcion != 0);
@@ -153,7 +154,7 @@ public class MenuPedidos {
                             Pedido confirmado = servicio.confirmar(usuarioId, borrador);
                             System.out.println("Pedido confirmado en memoria. ID: "
                                     + confirmado.getId() + ". Stock actualizado en MySQL.");
-                        } catch (IllegalArgumentException | IllegalStateException ex) {
+                        } catch (PersistenciaException | IllegalArgumentException | IllegalStateException ex) {
                             System.out.println("No se confirmó el pedido: " + ex.getMessage());
                             System.out.println("El borrador fue descartado sin guardarse.");
                         }
@@ -162,7 +163,7 @@ public class MenuPedidos {
                     case 0 -> System.out.println("Borrador descartado. No se descontó stock.");
                     default -> System.out.println("Opción fuera de rango.");
                 }
-            } catch (IllegalArgumentException | IllegalStateException ex) {
+            } catch (PersistenciaException | IllegalArgumentException | IllegalStateException ex) {
                 System.out.println("No se pudo realizar la operación: " + ex.getMessage());
             }
         } while (opcion != 0);
