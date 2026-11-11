@@ -43,3 +43,9 @@
 - La confirmación rechazó el pedido por stock insuficiente del ID 2.
 - La consulta posterior confirmó ID 1 = 20, ID 2 = 0: transacción sin descuento parcial, rollback verificado.
 - Antes de grabar, mostrar el caso con orden y sin revelar configuración de credenciales. **Pendiente**: restaurar ID 2 = 15 y comprobar que el pedido fallido no quedó en memoria.
+
+
+### Caso de demostración documentado — rechazo de pedido sin registro
+- Después de provocar stock insuficiente en la segunda línea, se verificó rollback en Workbench (ID 1 = 20, ID 2 = 0) y luego se restauró ID 2 = 15.
+- En consola, lista de pedidos activos vacía; historial del usuario ID 1 conserva solo pedido ID 1 cancelado/de baja, total 17000; no contiene el pedido rechazado de 20500.
+- Para el video explicar que la transacción de stock es atómica y que solo se incorpora un pedido al repositorio en memoria si el descuento se confirma con éxito.
