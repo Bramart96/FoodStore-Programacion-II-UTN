@@ -19,15 +19,15 @@ El anexo es el backlog mínimo. **Cada historia debe corresponder a una operaci�
 | USR-02 | Usuarios > Crear [MEMORIA] | Verificada | ID generado, controles de formato y duplicado (se observó rechazo de duplicado) |
 | USR-03 | Usuarios > Editar [MEMORIA] | Verificada para email | Se observó modificación de email; otros campos siguen sin prueba manual específica |
 | USR-04 | Usuarios > Eliminar [MEMORIA] | Parcial | Baja lógica ejecutada; falta comprobar ocultamiento inmediato, impedir nuevos pedidos y consulta histórica de pedidos de eliminados |
-| PED-01 | Pedidos > Listar y filtrar por usuario [MEMORIA] | Pendiente | Recorrer Usuario → Pedido; líneas, fecha, total, estado y filtros |
-| PED-02 | Pedidos > Crear con detalles [MEMORIA + BD] | Parcial | Métodos del modelo presentes; falta menú, usuario activo, consulta de productos, resumen y transacción de stock |
-| PED-03 | Pedidos > Editar estado/pago [MEMORIA + BD] | Parcial | Métodos de entidad presentes; falta menú, servicios, validación de estados y reposición transaccional |
-| PED-04 | Pedidos > Eliminar [MEMORIA + BD] | Parcial | Bajas lógicas del modelo presentes; falta servicio, menú y reposición de stock en BD |
+| PED-01 | Pedidos > Listar y filtrar por usuario [MEMORIA] | Parcial | Menú y recorrido de usuarios implementados; falta prueba local con pedidos activos y usuarios dados de baja |
+| PED-02 | Pedidos > Crear con detalles [MEMORIA + BD] | Parcial | Menú y StockDAO transaccional implementados; falta prueba de confirmación, stock y rollback |
+| PED-03 | Pedidos > Editar estado/pago [MEMORIA + BD] | Parcial | Servicio y menú implementados; falta comprobar estados terminales y reposición al cancelar |
+| PED-04 | Pedidos > Eliminar [MEMORIA + BD] | Parcial | Servicio y menú implementados; falta probar baja, detalles históricos y reposición una sola vez |
 | CFG-01 | Configuración > Consultar unidad y URL | Pendiente | Parseo DOM de persistence.xml sin URL hardcodeada |
 | CFG-02 | Diagnóstico de conexión al iniciar | Pendiente | Driver, conexión y mensajes sin stack trace |
 | CFG-03 | Instalar desde script SQL y README | Pendiente | `db/` con solamente categoria y producto, manual de reproducción |
 
-**Resumen (11/11/2026):** 20 historias; 3 con pruebas de usuario realizadas, 13 con implementación parcial (incluidas las 5 de productos) y 4 pendientes (PED/CFG según integración). Los criterios deben auditarse uno por uno antes de la entrega.
+**Resumen (11/11/2026):** 20 historias controladas por la matriz. Código de HU-PED-01/02/03/04 publicado pero pendiente de prueba local; las historias no se declaran terminadas hasta verificar sus casos de aceptación.
 
 ## Pruebas realizadas desde PowerShell — 11/11/2026
 

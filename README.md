@@ -21,7 +21,7 @@ Trabajo Práctico Integrador de Programación II: aplicación de consola con Jav
 
 **Publicado, pendiente de prueba local:** ProductoDAO, ProductoService y MenuProductos para CRUD JDBC, consulta por categoría y reasignación.
 
-**Pendiente:** repositorios de pedidos y detalles, transacciones de stock, menú de pedidos y pruebas integradas. No se afirma que el sistema ya gestione pedidos.
+**Implementado en código, pendiente de prueba local:** PedidoRepository, PedidoService, StockDAO y MenuPedidos para crear pedidos en memoria, modificar detalles del borrador, confirmar con transacción JDBC, cancelar, terminar y dar de baja. **Aún no se afirma que el flujo de pedidos esté validado por el estudiante.**
 
 ## Base de datos (instalación verificada)
 
@@ -49,6 +49,14 @@ En el archivo local de `bin/META-INF/` cambiar únicamente los valores de usuari
 ## Estado de la conexión
 
 Al iniciar, la aplicación realiza una prueba JDBC, informa si hay acceso y muestra errores controlados si no encuentra el driver, la base o las credenciales. La opción 5 informa unidad y URL. La contraseña no se imprime. El diagnóstico y la conexión fueron comprobados correctamente en el equipo del estudiante.
+
+## Pedidos y stock
+
+Los pedidos y sus detalles viven únicamente en memoria. La creación requiere usuario activo, producto disponible y cantidad válida. Al confirmar, StockDAO descuenta todas las unidades dentro de una sola transacción MySQL. Si falla alguna actualización, se hace rollback y no se agrega el pedido al usuario.
+
+La opción 4 permite listar pedidos, consultar historial por usuario, crear un borrador con detalles, confirmar, actualizar pago/estado y realizar una baja lógica. La cancelación repone stock de forma transaccional; se impide una segunda reposición para pedidos cancelados. La baja de un pedido terminado no repone stock porque ya fue cumplido.
+
+La demostración y los casos negativos deben realizarse en MySQL local antes de dar el módulo por verificado.
 
 ## Documentación y decisiones
 

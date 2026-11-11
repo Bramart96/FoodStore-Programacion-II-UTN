@@ -122,3 +122,11 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - **Dato a corregir:** Flan casero se cargó con precio 10, técnicamente válido pero distinto del precio de demostración previsto (4000).
 - **Acción indicada:** modificar únicamente el precio a 4000 mediante Productos > Editar; conservar los demás campos y verificar el listado. Corrección aún pendiente de confirmación.
 - **Estado:** carga y validaciones informadas como satisfactorias; auditoría final de las historias de Producto y pedidos todavía pendiente.
+
+### DEC-012 — Pedidos en memoria y transacciones JDBC (11/11/2026)
+- **Alcance:** HU-PED-01/02/03/04. Nuevo `PedidoRepository` que recorre la asociación Usuario -> Pedido y genera IDs en memoria sin agregar atributos inversos. `PedidoService` coordina creación, edición, confirmación, cancelación y baja lógica.
+- **Transacción:** `StockDAO` concentra el SQL. Usa `setAutoCommit(false)`, actualizaciones parametrizadas condicionadas a stock suficiente y disponibilidad, `commit` únicamente cuando se actualizaron todos los productos; ejecuta `rollback` ante errores. Los pedidos se registran en memoria solo después de confirmar la transacción.
+- **Reposición:** al cancelar o dar de baja un pedido confirmado se repone stock por JDBC. Un pedido ya cancelado no provoca una segunda reposición. Un pedido terminado se considera cumplido y su baja lógica no repone unidades.
+- **Interfaz:** `MenuPedidos` permite listar, filtrar por usuario, crear borrador, agregar/editar/eliminar detalles antes de confirmar, ver resumen, cambiar estado/pago y eliminar. Los usuarios dados de baja conservan acceso a su historial.
+- **Pendiente:** código publicado en GitHub; **compilación, prueba de stock y rollback en la computadora del estudiante todavía no verificadas**. Se ejecutarán pruebas positivas y negativas antes de marcar historias como completadas.
+- **Commits:** `Implementar repositorio de pedidos y transacciones de stock`, `Agregar menú de pedidos y operaciones de detalles`, `Integrar pedidos en memoria con descuento de stock JDBC`, `Controlar errores de conexión en el menú de pedidos`.
