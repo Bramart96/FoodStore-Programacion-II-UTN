@@ -130,3 +130,10 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - **Interfaz:** `MenuPedidos` permite listar, filtrar por usuario, crear borrador, agregar/editar/eliminar detalles antes de confirmar, ver resumen, cambiar estado/pago y eliminar. Los usuarios dados de baja conservan acceso a su historial.
 - **Pendiente:** código publicado en GitHub; **compilación, prueba de stock y rollback en la computadora del estudiante todavía no verificadas**. Se ejecutarán pruebas positivas y negativas antes de marcar historias como completadas.
 - **Commits:** `Implementar repositorio de pedidos y transacciones de stock`, `Agregar menú de pedidos y operaciones de detalles`, `Integrar pedidos en memoria con descuento de stock JDBC`, `Controlar errores de conexión en el menú de pedidos`.
+
+
+### Pruebas locales de pedidos y stock — 11/11/2026
+- **Creación y confirmación:** el estudiante confirmó un pedido en memoria (ID 1) con dos unidades de Hamburguesa clásica y total 17000, mediante la opción de confirmar.
+- **Descuento JDBC:** stock del producto pasó de 20 a 18, comprobado por el estudiante desde el listado de productos.
+- **Cancelación y reposición:** el estudiante canceló el pedido confirmado y verificó la restitución del stock original a 20 unidades.
+- **Estado:** casos de descuento y reposición verificados localmente; pruebas de cancelación repetida, baja lógica e intento de confirmar con stock insuficiente/rollback siguen pendientes.
