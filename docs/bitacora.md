@@ -137,3 +137,9 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - **Descuento JDBC:** stock del producto pasó de 20 a 18, comprobado por el estudiante desde el listado de productos.
 - **Cancelación y reposición:** el estudiante canceló el pedido confirmado y verificó la restitución del stock original a 20 unidades.
 - **Estado:** casos de descuento y reposición verificados localmente; pruebas de cancelación repetida, baja lógica e intento de confirmar con stock insuficiente/rollback siguen pendientes.
+
+
+### Prueba de cancelación repetida — 11/11/2026
+- El estudiante confirmó que al intentar cancelar de nuevo el pedido previamente cancelado, el sistema rechazó la modificación y el stock se mantuvo en 20 unidades.
+- **Validado:** la operación no repone una segunda vez las existencias.
+- **Pendiente:** baja lógica del pedido, consulta de historial y prueba controlada de rollback con más de un detalle.
