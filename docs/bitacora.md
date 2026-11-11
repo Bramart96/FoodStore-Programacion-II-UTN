@@ -173,3 +173,11 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - Tras cerrar y volver a ejecutar el programa, el estudiante comprobó que **no hay usuarios ni pedidos en memoria**.
 - Resultado validado para la parte no persistida del diseño mixto.
 - Pendiente de comprobar tras el mismo reinicio: categorías y productos permanecen almacenados en MySQL.
+
+
+### Persistencia mixta comprobada tras reinicio — 11/11/2026
+- Después de salir y ejecutar nuevamente Java, el estudiante verificó que las listas de usuarios y pedidos estaban vacías.
+- En la misma ejecución reiniciada, confirmó que permanecían las **4 categorías** y los **8 productos** del catálogo JDBC.
+- Stocks verificados tras reinicio: Hamburguesa clásica (ID 1) = **20** y Hamburguesa doble cheddar (ID 2) = **15**.
+- **Resultado validado:** entidades Usuario y Pedido en memoria volátil; Categoria y Producto persistidos en MySQL.
+- **Siguiente prueba pendiente:** impedir la baja lógica de una categoría que conserva productos activos.
