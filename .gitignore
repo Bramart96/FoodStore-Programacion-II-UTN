@@ -1,0 +1,23 @@
+# Compilación Java
+bin/
+build/
+dist/
+*.class
+
+# NetBeans: datos locales y privados
+nbproject/private/
+
+# IDE y sistema
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Configuraciones sensibles
+.env
+.env.*
+*.log
+
+# Copias de seguridad de bases de datos
+*.sql.bak
+*.dump
