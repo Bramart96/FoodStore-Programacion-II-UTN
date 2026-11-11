@@ -108,3 +108,9 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - **Preparación de datos:** el estudiante confirmó que limpió `foodstore_prog2` para volver a cargar categorías y productos desde Java. La consulta de recuentos posterior a la limpieza no fue mostrada en esta conversación.
 - **Próximas pruebas:** `git pull`, compilar, probar rechazo de campos numéricos, crear categorías reales, registrar productos y verificar persistencia.
 - **Commits de código:** `Validar campos de texto en categorías, productos y usuarios` y `Mejorar la validación inmediata de nombres en el menú de usuarios`.
+
+### Verificación local de validaciones y categorías — 11/11/2026
+- El estudiante confirmó que la nueva versión rechaza nombres y descripciones numéricos y permite reingresar texto válido.
+- El estudiante confirmó el alta y listado correctos de cuatro categorías de ejemplo desde el menú Java.
+- **Estado:** pruebas locales positivas de los casos indicados; faltan pruebas de límites, mensajes de error adicionales y confirmación visual de las asociaciones de productos.
+- **Siguiente paso:** cargar productos desde el menú JDBC, comprobar asociación por categoría, persistencia, edición, reasignación y baja lógica; no cargar datos desde Workbench.
