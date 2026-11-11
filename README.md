@@ -17,7 +17,9 @@ Trabajo Práctico Integrador de Programación II: aplicación de consola con Jav
 
 **Implementado, pendiente de prueba local:** lectura DOM de persistence.xml, conexión JDBC, diagnóstico al iniciar y opción 5 del menú.
 
-**Pendiente:** CRUD JDBC de categorías/productos, repositorios de pedidos y detalles, transacciones de stock, menú de pedidos y pruebas integradas. No se afirma que el sistema ya gestione pedidos.
+**Publicado; pendiente de prueba local:** GenericDAO, CategoriaDAO, CategoriaService y MenuCategorias, con operaciones CRUD de categorías.
+
+**Pendiente:** CRUD JDBC de productos, repositorios de pedidos y detalles, transacciones de stock, menú de pedidos y pruebas integradas. No se afirma que el sistema ya gestione pedidos.
 
 ## Base de datos (instalación verificada)
 

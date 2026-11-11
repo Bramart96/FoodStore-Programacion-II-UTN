@@ -72,3 +72,14 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - **Seguridad:** el repositorio publica solo `CAMBIAR_LOCALMENTE`. La credencial real se editará exclusivamente en `bin/META-INF/persistence.xml`, que está ignorado por Git; no debe guardarse en `src` ni compartirse por chat.
 - **Estado:** código publicado; instalación de driver indicada por el estudiante, pero ejecución JDBC y diagnóstico en su equipo **pendientes de prueba**. CRUD de categorías/productos y transacciones aún no implementados.
 - **Commits:** `Agregar configuración XML y conexión JDBC con manejo de errores`, `Integrar diagnóstico JDBC al inicio y opción de configuración`.
+
+
+## 11/11/2026 — Implementación de categorías con JDBC
+
+### DEC-009 — CRUD de Categoría
+- **Código publicado:** `GenericDAO<T>`, `CategoriaDAO`, `CategoriaService`, `MenuCategorias`, `CategoriaDuplicadaException` e integración de la opción 1 del menú principal.
+- **Reglas previstas:** listar categorías activas, crear con ID generado, evitar nombres duplicados mediante consulta SQL, editar conservando campos vacíos, realizar baja lógica e impedirla si existen productos activos asociados.
+- **Arquitectura:** consultas SQL y `java.sql` en DAO; servicio separado de consola.
+- **Estado:** código publicado, **compilación y prueba JDBC en el equipo del estudiante pendientes**.
+- **Prueba anterior:** la opción 5 mostró la configuración XML; para verificar el acceso real aún debe observarse el mensaje de conexión exitosa al arrancar.
+- **Commits:** `Implementar CRUD de categorías con JDBC y menú de consola` y `Habilitar gestión de categorías desde el menú principal`.
