@@ -143,3 +143,10 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - El estudiante confirmó que al intentar cancelar de nuevo el pedido previamente cancelado, el sistema rechazó la modificación y el stock se mantuvo en 20 unidades.
 - **Validado:** la operación no repone una segunda vez las existencias.
 - **Pendiente:** baja lógica del pedido, consulta de historial y prueba controlada de rollback con más de un detalle.
+
+
+### Pruebas locales — baja lógica e historial de pedidos (11/11/2026)
+- El estudiante confirmó que la baja lógica de un pedido previamente cancelado funciona.
+- El pedido dejó de aparecer en el listado de activos y permaneció consultable en el historial del usuario.
+- El stock de Hamburguesa clásica continuó en 20 unidades, sin reposición duplicada.
+- **Siguiente caso pendiente:** transacción con dos productos, error provocado antes de confirmar, comprobación de ROLLBACK y ausencia de registro en memoria.
