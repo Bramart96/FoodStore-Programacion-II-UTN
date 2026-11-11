@@ -54,3 +54,8 @@
 ### Prueba de reinicio — memoria volátil (11/11/2026)
 - El estudiante cerró y reabrió la aplicación; verificó que los listados de usuarios y pedidos quedaron vacíos.
 - Para la demostración final, contrastar en el mismo reinicio con categorías y productos persistentes. La segunda mitad de esta prueba está pendiente.
+
+
+### Persistencia diferencial confirmada — 11/11/2026
+- Tras reiniciar Java, usuarios y pedidos quedaron vacíos, mientras que el estudiante verificó el catálogo de 4 categorías y 8 productos, con stock 20 (Hamburguesa clásica) y 15 (doble cheddar).
+- Para la grabación, mostrar antes/después del reinicio como evidencia del almacenamiento mixto. La comprobación funcional ya se hizo; aún hay que filmarla.
