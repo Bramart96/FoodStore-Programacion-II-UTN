@@ -228,3 +228,9 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - El estudiante modificó la cantidad de 2 a 3; la pantalla confirmó un total de **$25500** (captura aportada).
 - También confirmó que quitar el detalle funcionó y que el resumen volvió a quedar sin detalles activos (total $0).
 - **Validado:** modificación de cantidad, recálculo de total y baja lógica de detalles de un pedido sin confirmar.
+
+
+### Control de ID inexistente en edición de usuarios
+- En el menú Usuarios, el estudiante creó un usuario ficticio, intentó editar el ID 999 y obtuvo el mensaje controlado: «No existe un usuario activo con ID 999».
+- La aplicación regresó al submenú sin cerrar ni mostrar stack trace.
+- Validada la captura de `EntidadNoEncontradaException` incorporada en `MenuUsuarios`.
