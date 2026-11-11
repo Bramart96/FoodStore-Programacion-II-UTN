@@ -70,3 +70,9 @@ El estudiante dejó preparado en consola un pedido **sin confirmar** con los pro
 ### Prueba de reinicio de pedidos en memoria — 11/11/2026
 - Tras salir y volver a iniciar Java, el estudiante verificó que no hay pedidos en memoria y que la lista de usuarios también está vacía.
 - La comprobación de persistencia del catálogo JDBC tras ese reinicio se realizará por separado.
+
+
+### Persistencia después de reinicio — validada 11/11/2026
+- Reinicio real desde PowerShell: usuarios y pedidos vacíos en memoria.
+- Catálogo JDBC conservado: 4 categorías y 8 productos; stocks ID 1 = 20 e ID 2 = 15.
+- **Caso de persistencia mixta validado.**
