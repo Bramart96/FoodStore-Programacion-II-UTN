@@ -54,6 +54,20 @@ public class UsuarioRepository {
         }
     }
 
+    /** Conserva los usuarios dados de baja para consultar sus pedidos. */
+    public List<Usuario> listarTodos() {
+        return List.copyOf(usuarios);
+    }
+
+    public Usuario buscarIncluidoEliminado(long id) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId().equals(id)) {
+                return usuario;
+            }
+        }
+        throw new EntidadNoEncontradaException("No existe un usuario con ID " + id + ".");
+    }
+
     public void eliminar(long id) {
         buscarActivo(id).eliminar();
     }
