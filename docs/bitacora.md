@@ -83,3 +83,11 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - **Estado:** código publicado, **compilación y prueba JDBC en el equipo del estudiante pendientes**.
 - **Prueba anterior:** la opción 5 mostró la configuración XML; para verificar el acceso real aún debe observarse el mensaje de conexión exitosa al arrancar.
 - **Commits:** `Implementar CRUD de categorías con JDBC y menú de consola` y `Habilitar gestión de categorías desde el menú principal`.
+
+
+### Validación de conexión y revisión de persistencia — 11/11/2026
+- **JDBC:** el estudiante mostró el mensaje `Conexión a MySQL verificada correctamente.` y el menú Categorías funcionando.
+- **CRUD de categorías:** el estudiante informó altas, listados, ediciones y bajas operativas.
+- **Persistencia tras reinicio:** todavía **no verificada**; el estudiante informó que un ID no aparecía después de reiniciar. Podría tratarse de una baja lógica ejecutada durante las pruebas. No se atribuye una causa sin comprobarlo.
+- **Próxima prueba:** crear `PruebaPersistencia`, listar, cerrar sin eliminar, reiniciar y volver a listar. Contrastar con `SELECT id, nombre, descripcion, eliminado FROM foodstore_prog2.categoria ORDER BY id`.
+- **No modificar esquema ni código** hasta conocer el resultado de esa verificación.
