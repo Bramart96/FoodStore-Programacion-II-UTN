@@ -35,8 +35,11 @@ Desde la raíz del proyecto:
 
 ```powershell
 New-Item -ItemType Directory -Path .\\bin\\META-INF -Force | Out-Null
-Copy-Item .\\src\\META-INF\\persistence.xml .\\bin\\META-INF\\persistence.xml -Force
-notepad .\\bin\\META-INF\\persistence.xml
+if (!(Test-Path .\\bin\\META-INF\\persistence.xml)) {
+    Copy-Item .\\src\\META-INF\\persistence.xml .\\bin\\META-INF\\persistence.xml
+}
+# Solo la primera vez, editar la contraseña local con:
+# notepad .\\bin\\META-INF\\persistence.xml
 javac --release 21 -encoding UTF-8 -d bin (Get-ChildItem -Path .\\src -Recurse -Filter *.java | ForEach-Object { $_.FullName })
 java -cp "bin;lib/*" integrado.prog2.Main
 ```
