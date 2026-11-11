@@ -6,6 +6,7 @@ import integrado.prog2.exception.PersistenciaException;
 import integrado.prog2.service.CategoriaService;
 import java.util.List;
 import java.util.Scanner;
+import integrado.prog2.validation.ValidacionTexto;
 
 /** Operaciones CRUD de categorías desde consola. */
 public class MenuCategorias {
@@ -57,8 +58,9 @@ public class MenuCategorias {
 
     private void crear() {
         System.out.println("\n--- NUEVA CATEGORÍA ---");
-        String nombre = leerTexto("Nombre: ");
-        String descripcion = leerTexto("Descripción: ");
+        String nombre = leerTextoValidado("Nombre: ", "nombre de categoría", 100, true);
+        String descripcion = leerTextoValidado(
+                "Descripción: ", "descripción de categoría", 255, true);
         Categoria creada = servicio.crear(nombre, descripcion);
         System.out.println("Categoría registrada en la base. ID: " + creada.getId());
     }
@@ -72,8 +74,9 @@ public class MenuCategorias {
         long id = leerLong("ID a editar: ");
         servicio.buscar(id);
         System.out.println("Dejá un campo vacío para conservar el valor anterior.");
-        String nombre = leerTexto("Nuevo nombre: ");
-        String descripcion = leerTexto("Nueva descripción: ");
+        String nombre = leerTextoValidado("Nuevo nombre: ", "nombre de categoría", 100, false);
+        String descripcion = leerTextoValidado(
+                "Nueva descripción: ", "descripción de categoría", 255, false);
         servicio.editar(id, nombre, descripcion);
         System.out.println("Categoría actualizada correctamente.");
     }
@@ -98,6 +101,20 @@ public class MenuCategorias {
     private String leerTexto(String etiqueta) {
         System.out.print(etiqueta);
         return scanner.nextLine();
+    }
+
+    private String leerTextoValidado(String etiqueta, String campo,
+                                    int maximo, boolean obligatorio) {
+        while (true) {
+            String valor = leerTexto(etiqueta);
+            try {
+                return obligatorio
+                        ? ValidacionTexto.obligatorio(valor, campo, maximo)
+                        : ValidacionTexto.opcional(valor, campo, maximo);
+            } catch (IllegalArgumentException ex) {
+                System.out.println("Dato inválido: " + ex.getMessage());
+            }
+        }
     }
 
     private int leerEntero(String etiqueta) {

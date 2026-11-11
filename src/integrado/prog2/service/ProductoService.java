@@ -5,6 +5,7 @@ import integrado.prog2.dao.ProductoDAO;
 import integrado.prog2.entities.Categoria;
 import integrado.prog2.entities.Producto;
 import java.util.List;
+import integrado.prog2.validation.ValidacionTexto;
 
 /**
  * Coordina el catálogo sin guardar la categoría dentro de Producto.
@@ -49,9 +50,14 @@ public class ProductoService {
 
     public Producto crear(String nombre, Double precio, String descripcion,
                          int stock, String imagen, Boolean disponible, long idCategoria) {
+        String nombreValido = ValidacionTexto.obligatorio(nombre, "nombre del producto", 120);
+        String descripcionValida = ValidacionTexto.obligatorio(
+                descripcion, "descripción del producto", 255);
+        String imagenValida = ValidacionTexto.opcional(imagen, "imagen", 255);
+        validarPrecio(precio);
         categoriaDAO.buscarPorId(idCategoria);
-        Producto producto = new Producto(nombre, precio, descripcion,
-                                        stock, imagen, disponible);
+        Producto producto = new Producto(nombreValido, precio, descripcionValida,
+                                        stock, imagenValida, disponible);
         return productoDAO.insertar(producto, idCategoria);
     }
 
@@ -60,24 +66,36 @@ public class ProductoService {
                        Integer stock, String imagen, Boolean disponible) {
         Producto producto = productoDAO.buscarPorId(id);
         if (nombre != null && !nombre.isBlank()) {
-            producto.setNombre(nombre);
+            producto.setNombre(ValidacionTexto.obligatorio(
+                    nombre, "nombre del producto", 120));
         }
         if (precio != null) {
+            validarPrecio(precio);
             producto.setPrecio(precio);
         }
         if (descripcion != null && !descripcion.isBlank()) {
-            producto.setDescripcion(descripcion);
+            producto.setDescripcion(ValidacionTexto.obligatorio(
+                    descripcion, "descripción del producto", 255));
         }
         if (stock != null) {
             producto.setStock(stock);
         }
         if (imagen != null && !imagen.isBlank()) {
-            producto.setImagen(imagen);
+            producto.setImagen(ValidacionTexto.opcional(imagen, "imagen", 255));
         }
         if (disponible != null) {
             producto.setDisponible(disponible);
         }
         productoDAO.actualizar(producto);
+    }
+
+    /** Evita valores que no caben en el DECIMAL(10,2) del esquema. */
+    private void validarPrecio(Double precio) {
+        if (precio == null || !Double.isFinite(precio) || precio < 0
+                || precio > 99999999.99) {
+            throw new IllegalArgumentException(
+                    "El precio debe estar entre 0 y 99999999,99.");
+        }
     }
 
     public void reasignarCategoria(long idProducto, long idCategoria) {

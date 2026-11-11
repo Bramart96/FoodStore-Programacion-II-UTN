@@ -7,6 +7,7 @@ import integrado.prog2.exception.PersistenciaException;
 import integrado.prog2.service.ProductoService;
 import java.util.List;
 import java.util.Scanner;
+import integrado.prog2.validation.ValidacionTexto;
 
 /** Menú de gestión de productos persistidos por JDBC. */
 public class MenuProductos {
@@ -85,11 +86,12 @@ public class MenuProductos {
         servicio.buscarCategoria(idCategoria);
 
         System.out.println("\n--- NUEVO PRODUCTO ---");
-        String nombre = leerTexto("Nombre: ");
-        String descripcion = leerTexto("Descripción: ");
+        String nombre = leerTextoValidado("Nombre: ", "nombre del producto", 120, true);
+        String descripcion = leerTextoValidado(
+                "Descripción: ", "descripción del producto", 255, true);
         Double precio = leerDecimal("Precio: ");
         int stock = leerEntero("Stock: ");
-        String imagen = leerTexto("Imagen (ruta o URL, opcional): ");
+        String imagen = leerTextoValidado("Imagen (ruta o URL, opcional): ", "imagen", 255, false);
         boolean disponible = leerDisponibilidad();
 
         Producto creado = servicio.crear(
@@ -108,11 +110,12 @@ public class MenuProductos {
         System.out.println("Editando: " + actual);
         System.out.println("Dejá vacío el campo que no quieras modificar.");
 
-        String nombre = leerTexto("Nuevo nombre: ");
-        String descripcion = leerTexto("Nueva descripción: ");
+        String nombre = leerTextoValidado("Nuevo nombre: ", "nombre del producto", 120, false);
+        String descripcion = leerTextoValidado(
+                "Nueva descripción: ", "descripción del producto", 255, false);
         Double precio = leerDecimalOpcional("Nuevo precio: ");
         Integer stock = leerEnteroOpcional("Nuevo stock: ");
-        String imagen = leerTexto("Nueva imagen: ");
+        String imagen = leerTextoValidado("Nueva imagen: ", "imagen", 255, false);
         Boolean disponible = leerDisponibilidadOpcional();
         servicio.editar(id, nombre, precio, descripcion, stock, imagen, disponible);
         System.out.println("Producto actualizado correctamente.");
@@ -166,6 +169,21 @@ public class MenuProductos {
     private String leerTexto(String mensaje) {
         System.out.print(mensaje);
         return scanner.nextLine();
+    }
+
+    /** Repite la pregunta si un texto está vacío o contiene solo números. */
+    private String leerTextoValidado(String mensaje, String campo,
+                                    int maximo, boolean obligatorio) {
+        while (true) {
+            String valor = leerTexto(mensaje);
+            try {
+                return obligatorio
+                        ? ValidacionTexto.obligatorio(valor, campo, maximo)
+                        : ValidacionTexto.opcional(valor, campo, maximo);
+            } catch (IllegalArgumentException ex) {
+                System.out.println("Dato inválido: " + ex.getMessage());
+            }
+        }
     }
 
     private int leerEntero(String mensaje) {

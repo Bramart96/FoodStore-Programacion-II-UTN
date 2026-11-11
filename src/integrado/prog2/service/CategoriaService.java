@@ -3,6 +3,7 @@ package integrado.prog2.service;
 import integrado.prog2.dao.CategoriaDAO;
 import integrado.prog2.entities.Categoria;
 import java.util.List;
+import integrado.prog2.validation.ValidacionTexto;
 
 /** Casos de uso de categorías, sin sentencias SQL ni lectura de consola. */
 public class CategoriaService {
@@ -25,17 +26,21 @@ public class CategoriaService {
     }
 
     public Categoria crear(String nombre, String descripcion) {
-        return dao.insertar(new Categoria(nombre, descripcion));
+        return dao.insertar(new Categoria(
+                ValidacionTexto.obligatorio(nombre, "nombre de categoría", 100),
+                ValidacionTexto.obligatorio(descripcion, "descripción de categoría", 255)));
     }
 
     /** Los campos vacíos conservan su valor, como exige la historia de usuario. */
     public void editar(long id, String nombre, String descripcion) {
         Categoria categoria = dao.buscarPorId(id);
         if (nombre != null && !nombre.isBlank()) {
-            categoria.setNombre(nombre);
+            categoria.setNombre(ValidacionTexto.obligatorio(
+                    nombre, "nombre de categoría", 100));
         }
         if (descripcion != null && !descripcion.isBlank()) {
-            categoria.setDescripcion(descripcion);
+            categoria.setDescripcion(ValidacionTexto.obligatorio(
+                    descripcion, "descripción de categoría", 255));
         }
         dao.actualizar(categoria);
     }

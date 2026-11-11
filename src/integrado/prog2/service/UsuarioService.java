@@ -4,6 +4,7 @@ import integrado.prog2.entities.Usuario;
 import integrado.prog2.enums.Rol;
 import integrado.prog2.repository.UsuarioRepository;
 import java.util.List;
+import integrado.prog2.validation.ValidacionTexto;
 
 /** Coordina las reglas de alta, consulta, edición y baja de usuarios. */
 public class UsuarioService {
@@ -19,7 +20,10 @@ public class UsuarioService {
 
     public Usuario crear(String nombre, String apellido, String mail,
                          String celular, String contrasena, Rol rol) {
-        Usuario usuario = new Usuario(nombre, apellido, mail, celular, contrasena, rol);
+        Usuario usuario = new Usuario(
+                ValidacionTexto.obligatorio(nombre, "nombre del usuario", 100),
+                ValidacionTexto.obligatorio(apellido, "apellido del usuario", 100),
+                mail, celular, contrasena, rol);
         return repositorio.guardar(usuario);
     }
 
@@ -32,11 +36,13 @@ public class UsuarioService {
     }
 
     public void cambiarNombre(long id, String nombre) {
-        buscar(id).setNombre(nombre);
+        buscar(id).setNombre(ValidacionTexto.obligatorio(
+                nombre, "nombre del usuario", 100));
     }
 
     public void cambiarApellido(long id, String apellido) {
-        buscar(id).setApellido(apellido);
+        buscar(id).setApellido(ValidacionTexto.obligatorio(
+                apellido, "apellido del usuario", 100));
     }
 
     public void cambiarMail(long id, String mail) {
