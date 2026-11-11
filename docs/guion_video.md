@@ -68,3 +68,32 @@
 
 ### Filtro de productos por categoría validado — 11/11/2026
 - La consulta por categoría Hamburguesas mostró solamente los dos productos correspondientes. Preparar para el video una demostración breve del filtro y la asociación unidireccional Categoria -> Productos.
+
+
+## PLAN DEFINITIVO DE GRABACIÓN — actualización docente del 11/11/2026
+
+**Prioridad:** video público de **10 a 15 minutos**. Objetivo de edición/guion: ~12-13 minutos, dejando margen dentro del rango. **No se filma toda la batería de pruebas**: esa batería se usa para validar el desarrollo. La consigna original pide recorrer el flujo completo y demostrar de forma explícita persistencia: crear una categoría y un producto, cerrar Java, volverlo a abrir, comprobar que persisten y que usuarios/pedidos ya no están.
+
+### Secuencia reducida para el video (tiempos orientativos)
+
+| Tramo | Tiempo | Mostrar |
+|---|---|---|
+| 1. Introducción | 0:00–1:00 | Food Store, Java 21, POO, MySQL/JDBC y almacenamiento mixto |
+| 2. Organización y conexión | 1:00–2:00 | Carpetas por capas, solo tablas categoria/producto, conexión |
+| 3. Catálogo persistente | 2:00–4:30 | Crear UNA categoría y UN producto de demostración, listarlos, validación relevante |
+| 4. Usuario y pedido | 4:30–8:30 | Crear usuario ficticio, agregar detalles, calcular total, confirmar, mostrar descuento de stock |
+| 5. Estados e integridad | 8:30–10:00 | Cancelar/reponer stock; baja lógica o excepción controlada como muestra |
+| 6. Reinicio obligatorio | 10:00–12:30 | Salir y volver a iniciar; categorías/productos presentes, usuario/pedidos ausentes |
+| 7. Cierre | 12:30–13:00 | Qué se demostró; documentación del código en repositorio |
+
+**Casos que deben estar validados en desarrollo pero no hace falta filmar completos:** rollback forzado desde Workbench, cancelación repetida, consultas detalladas de historial, filtro y reasignación de categoría, entradas inválidas repetidas. La reasignación es criterio de HU-PROD-04 y se probará brevemente fuera de cámara; no necesita espacio en el video si se presenta otro ejemplo del CRUD.
+
+### Cambio de entregables anunciado por correo docente — 11/11/2026
+
+El correo de ARIEL ENFERREL (vía TUP), aportado en captura por el estudiante, especifica **únicamente**:
+1. Un archivo **.zip** con el código fuente completo para adjuntar en la plataforma.
+2. **Enlace público al video** en los comentarios de la entrega.
+
+El docente aclara: **no se debe entregar informe escrito**, y **no incluir el video dentro del .zip**. Este correo es posterior a la consigna y rúbrica originales, que sí exigían PDF y hasta lo mencionaban como criterio excluyente. Para el envío en la plataforma se seguirá la comunicación más reciente; conservar captura del correo por la discrepancia. El script SQL sigue siendo parte necesaria del código completo y el repositorio debe mantenerse accesible según la rúbrica.
+
+No añadir credenciales reales al .zip ni en pantallas del video. Preparar el video cuando el programa y el catálogo de demostración estén listos.
