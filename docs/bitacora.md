@@ -150,3 +150,12 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - El pedido dejó de aparecer en el listado de activos y permaneció consultable en el historial del usuario.
 - El stock de Hamburguesa clásica continuó en 20 unidades, sin reposición duplicada.
 - **Siguiente caso pendiente:** transacción con dos productos, error provocado antes de confirmar, comprobación de ROLLBACK y ausencia de registro en memoria.
+
+
+### Prueba controlada de rollback de pedido — 11/11/2026
+- Borrador con dos líneas: ID 1 Hamburguesa clásica (1 x 8500) e ID 2 Hamburguesa doble cheddar (1 x 12000); total 20500.
+- Stock previo comprobado por el estudiante en Workbench: producto ID 1 = 20, producto ID 2 = 15; ambos disponibles.
+- Simulación temporal: el estudiante modificó el stock del producto ID 2 a cero.
+- Desde PowerShell intentó confirmar el borrador. La aplicación informó stock insuficiente del producto ID 2 y rechazó la confirmación.
+- Consulta posterior en Workbench: ID 1 = 20 e ID 2 = 0. **ROLLBACK de descuentos verificado:** no hubo descuento parcial del primer producto.
+- **Pendientes de comprobación:** restaurar stock del ID 2 a 15; verificar que el pedido fallido no aparece en la lista de pedidos activos ni en el historial.
