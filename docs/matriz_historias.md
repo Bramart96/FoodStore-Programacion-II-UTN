@@ -10,11 +10,11 @@ El anexo es el backlog mínimo. **Cada historia debe corresponder a una operaci�
 | CAT-02 | Categorías > Crear [BD] | Parcial | Probar alta, ID generado, duplicado y persistencia |
 | CAT-03 | Categorías > Editar [BD] | Parcial | Probar edición, ID inválido y conservación de campos |
 | CAT-04 | Categorías > Eliminar [BD] | Parcial | Probar baja lógica y bloqueo con productos activos |
-| PROD-01 | Productos > Listar activos [BD] | Pendiente | Datos completos y consulta JDBC sin categoría inversa |
-| PROD-02 | Productos > Listar por categoría [BD] | Pendiente | Lista de categorías, consulta FK y agregación Categoria → Productos |
-| PROD-03 | Productos > Crear [BD] | Pendiente | Campos obligatorios, categoría activa, validaciones, INSERT e ID |
-| PROD-04 | Productos > Editar/reasignar categoría [BD] | Pendiente | UPDATE de atributos propios separado del cambio de categoria_id |
-| PROD-05 | Productos > Eliminar [BD] | Pendiente | Baja lógica, no afectar detalles históricos |
+| PROD-01 | Productos > Listar activos [BD] | Parcial | Código publicado; falta prueba local del listado |
+| PROD-02 | Productos > Listar por categoría [BD] | Parcial | Código publicado; falta probar selección y agregación unidireccional |
+| PROD-03 | Productos > Crear [BD] | Parcial | Código publicado; probar creación, categoría activa, errores e ID |
+| PROD-04 | Productos > Editar/reasignar categoría [BD] | Parcial | Código publicado; probar edición y reasignación por separado |
+| PROD-05 | Productos > Eliminar [BD] | Parcial | Código publicado; probar baja e historial de detalles cuando haya pedidos |
 | USR-01 | Usuarios > Listar [MEMORIA] | Verificada | Se observó listado con ID y datos; volver a probar si cambia UI |
 | USR-02 | Usuarios > Crear [MEMORIA] | Verificada | ID generado, controles de formato y duplicado (se observó rechazo de duplicado) |
 | USR-03 | Usuarios > Editar [MEMORIA] | Verificada para email | Se observó modificación de email; otros campos siguen sin prueba manual específica |
@@ -27,7 +27,7 @@ El anexo es el backlog mínimo. **Cada historia debe corresponder a una operaci�
 | CFG-02 | Diagnóstico de conexión al iniciar | Pendiente | Driver, conexión y mensajes sin stack trace |
 | CFG-03 | Instalar desde script SQL y README | Pendiente | `db/` con solamente categoria y producto, manual de reproducción |
 
-**Resumen a 11/11/2026:** 20 historias: 3 verificadas en flujos concretos (USR-01/02/03), 8 parciales (CAT-01/02/03/04, USR-04 y PED-02/03/04) y 9 pendientes. Las 4 historias de categorías requieren pruebas locales de JDBC. **No significa que 3 historias estén auditadas al 100 % de todos los criterios:** la edición de los distintos campos y los errores de entrada deben repetirse en una batería final.
+**Resumen (11/11/2026):** 20 historias; 3 con pruebas de usuario realizadas, 13 con implementación parcial (incluidas las 5 de productos) y 4 pendientes (PED/CFG según integración). Los criterios deben auditarse uno por uno antes de la entrega.
 
 ## Pruebas realizadas desde PowerShell — 11/11/2026
 

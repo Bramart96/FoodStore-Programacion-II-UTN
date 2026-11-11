@@ -17,13 +17,15 @@ Trabajo Práctico Integrador de Programación II: aplicación de consola con Jav
 
 **Implementado, pendiente de prueba local:** lectura DOM de persistence.xml, conexión JDBC, diagnóstico al iniciar y opción 5 del menú.
 
-**Publicado; pendiente de prueba local:** GenericDAO, CategoriaDAO, CategoriaService y MenuCategorias, con operaciones CRUD de categorías.
+**Verificado por el estudiante:** CRUD JDBC de categorías, incluida la permanencia de categorías después de reiniciar el programa. Quedan casos límite y prueba de bloqueo de baja con productos activos.
 
-**Pendiente:** CRUD JDBC de productos, repositorios de pedidos y detalles, transacciones de stock, menú de pedidos y pruebas integradas. No se afirma que el sistema ya gestione pedidos.
+**Publicado, pendiente de prueba local:** ProductoDAO, ProductoService y MenuProductos para CRUD JDBC, consulta por categoría y reasignación.
+
+**Pendiente:** repositorios de pedidos y detalles, transacciones de stock, menú de pedidos y pruebas integradas. No se afirma que el sistema ya gestione pedidos.
 
 ## Base de datos (instalación verificada)
 
-El archivo `db/01_esquema.sql` crea la base `foodstore_prog2` y las tablas `categoria` y `producto` para MySQL 8, sin eliminar registros. Su ejecución fue verificada en MySQL Workbench el 11/11/2026: ambas tablas creadas, definiciones consultadas y recuentos iniciales de 0 registros. **La conexión JDBC desde Java todavía está pendiente de implementar y probar.**
+El archivo `db/01_esquema.sql` crea la base `foodstore_prog2` y las tablas `categoria` y `producto` para MySQL 8, sin eliminar registros. Su ejecución fue verificada en MySQL Workbench el 11/11/2026: ambas tablas creadas, definiciones consultadas y recuentos iniciales de 0 registros. **Conexión JDBC verificada desde Java con mensaje de éxito al iniciar.**
 
 ## Compilar y ejecutar desde PowerShell (Windows)
 
@@ -43,7 +45,7 @@ En el archivo local de `bin/META-INF/` cambiar únicamente los valores de usuari
 
 ## Estado de la conexión
 
-Al iniciar, la aplicación realiza una prueba JDBC, informa si hay acceso y muestra errores controlados si no encuentra el driver, la base o las credenciales. La opción 5 informa unidad y URL. La contraseña no se imprime. La conexión real debe comprobarse en el equipo del estudiante.
+Al iniciar, la aplicación realiza una prueba JDBC, informa si hay acceso y muestra errores controlados si no encuentra el driver, la base o las credenciales. La opción 5 informa unidad y URL. La contraseña no se imprime. El diagnóstico y la conexión fueron comprobados correctamente en el equipo del estudiante.
 
 ## Documentación y decisiones
 

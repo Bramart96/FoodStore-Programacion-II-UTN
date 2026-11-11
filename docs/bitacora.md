@@ -88,6 +88,14 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 ### Validación de conexión y revisión de persistencia — 11/11/2026
 - **JDBC:** el estudiante mostró el mensaje `Conexión a MySQL verificada correctamente.` y el menú Categorías funcionando.
 - **CRUD de categorías:** el estudiante informó altas, listados, ediciones y bajas operativas.
-- **Persistencia tras reinicio:** todavía **no verificada**; el estudiante informó que un ID no aparecía después de reiniciar. Podría tratarse de una baja lógica ejecutada durante las pruebas. No se atribuye una causa sin comprobarlo.
-- **Próxima prueba:** crear `PruebaPersistencia`, listar, cerrar sin eliminar, reiniciar y volver a listar. Contrastar con `SELECT id, nombre, descripcion, eliminado FROM foodstore_prog2.categoria ORDER BY id`.
-- **No modificar esquema ni código** hasta conocer el resultado de esa verificación.
+- **Persistencia tras reinicio:** confirmada por el estudiante. Una categoría creada y no eliminada permaneció en el listado tras cerrar y volver a abrir el programa.
+- **Estado de categorías:** alta, listado, edición, baja y persistencia fueron probados; quedan validaciones de borde, duplicados y bloqueo de baja con productos activos para la auditoría final.
+
+
+### DEC-010 — Gestión JDBC de Producto (11/11/2026)
+- **Implementado y publicado:** `ProductoDAO`, `ProductoService` y `MenuProductos`; opción 2 del menú habilitada.
+- **Casos de uso:** listar activos, listar por categoría cargando `Categoria.productos`, crear con `idCategoria`, editar datos propios, reasignar categoría mediante operación separada, baja lógica.
+- **Decisión sobre interfaz genérica:** `GenericDAO` conserva listado, búsqueda, actualización y baja; cada DAO define su alta porque Producto exige un ID de categoría adicional. Se retiró `@Override` de `CategoriaDAO.insertar`.
+- **Restricciones:** SQL parametrizado solo en DAO, categoría activa obligatoria, precio/stock no negativos mediante validaciones de la entidad. La columna `categoria_id` no aparece en Producto.java.
+- **Estado:** código publicado en GitHub. **Compilación y pruebas con JDBC en la computadora del estudiante pendientes**, sin afirmar funcionalidad verificada.
+- **Commits:** `Implementar operaciones JDBC de productos y adaptar contrato DAO`, `Agregar servicio y menú de gestión de productos`, `Habilitar el menú de productos desde Main`.
