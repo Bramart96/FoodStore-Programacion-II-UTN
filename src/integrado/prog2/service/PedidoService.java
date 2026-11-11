@@ -59,6 +59,7 @@ public class PedidoService {
     }
 
     public void agregarDetalle(Pedido borrador, long idProducto, int cantidad) {
+        validarBorrador(borrador);
         if (cantidad <= 0) {
             throw new StockInvalidoException("La cantidad debe ser mayor a cero.");
         }
@@ -68,6 +69,7 @@ public class PedidoService {
     }
 
     public void cambiarCantidad(Pedido borrador, long idProducto, int cantidad) {
+        validarBorrador(borrador);
         if (cantidad <= 0) {
             throw new StockInvalidoException("La cantidad debe ser mayor a cero.");
         }
@@ -77,8 +79,16 @@ public class PedidoService {
     }
 
     public void eliminarDetalle(Pedido borrador, long idProducto) {
+        validarBorrador(borrador);
         Producto producto = productos.buscarPorId(idProducto);
         borrador.deleteDetallePedidoByProducto(producto);
+    }
+
+    /** Informa un dato faltante sin provocar NullPointerException en el servicio. */
+    private void validarBorrador(Pedido borrador) {
+        if (borrador == null) {
+            throw new IllegalArgumentException("Debe indicar un pedido en preparación.");
+        }
     }
 
     private void verificarProductoParaPedido(Producto producto, int cantidad) {
