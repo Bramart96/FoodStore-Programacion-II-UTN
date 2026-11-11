@@ -38,3 +38,12 @@ En una prueba de rollback se pueden simular cambios de stock desde una segunda s
 
 ## Estado
 Código publicado; resultados funcionales del módulo de pedidos **aún pendientes de confirmar por el estudiante**.
+
+## ROLLBACK — preparación real comprobada (11/11/2026)
+
+El estudiante dejó preparado en consola un pedido **sin confirmar** con los productos ID 1 (Hamburguesa clásica, 1 unidad) e ID 2 (Hamburguesa doble cheddar, 1 unidad); total de borrador: **20500**. Se verificó en MySQL Workbench, antes de forzar el error:
+
+- ID 1: stock **20**, disponible **1**.
+- ID 2: stock **15**, disponible **1**.
+
+**Aún no se ejecutó la prueba de rollback ni se modificó el stock para provocarla.** Pasos posteriores: cambiar temporalmente el stock del ID 2 a cero, confirmar el borrador, comprobar que el stock del ID 1 no disminuye y que no se guarda pedido en memoria, y restaurar ID 2 a 15. Usar UPDATE restringido por ID y valor anterior, verificar filas afectadas. No repetir confirmación antes de restaurar los valores.
