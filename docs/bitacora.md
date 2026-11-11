@@ -159,3 +159,11 @@ Se consultaron consigna, rúbrica, UML, guía de continuidad, ZIP del TP08 y dev
 - Desde PowerShell intentó confirmar el borrador. La aplicación informó stock insuficiente del producto ID 2 y rechazó la confirmación.
 - Consulta posterior en Workbench: ID 1 = 20 e ID 2 = 0. **ROLLBACK de descuentos verificado:** no hubo descuento parcial del primer producto.
 - **Pendientes de comprobación:** restaurar stock del ID 2 a 15; verificar que el pedido fallido no aparece en la lista de pedidos activos ni en el historial.
+
+
+### Validación final del caso de rollback y memoria — 11/11/2026
+- El estudiante restauró el stock de prueba a sus valores originales: Hamburguesa clásica (ID 1) = 20 y doble cheddar (ID 2) = 15.
+- Tras la confirmación fallida por stock insuficiente, en el menú de pedidos se comprobó que **no existen pedidos activos en memoria**.
+- En el historial del usuario ID 1 solo aparece el pedido anterior, ID 1, CANCELADO y con BAJA LÓGICA, total $17000, detalle de dos Hamburguesas clásicas señalado [DETALLE ELIMINADO].
+- El pedido rechazado de $20500 **no aparece en el historial**. Resultado: rollback completo, sin registro indebido en memoria.
+- **Próxima prueba:** reinicio y comprobación de persistencia diferencial: catálogo en MySQL sí, usuarios/pedidos en memoria no.
