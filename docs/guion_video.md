@@ -1,0 +1,36 @@
+# Guion del video final — Food Store (Programación II)
+
+**Duración exigida por la consigna:** 10 a 15 minutos. Mostrar flujo completo de consola y demostrar expresamente la diferencia entre persistencia JDBC y colecciones en memoria. Se registran resultados informados por el estudiante, no pruebas hipotéticas.
+
+## Pruebas confirmadas al 11/11/2026
+
+- [x] Compilación Java y arranque por PowerShell; conexión JDBC y opción de configuración.
+- [x] Esquema MySQL: solamente tablas `categoria` y `producto`.
+- [x] Categorías: alta, listado, edición, baja lógica, validaciones y persistencia tras reiniciar.
+- [x] Usuarios en memoria: alta, listado, edición, duplicados, baja y lista vacía tras reiniciar.
+- [x] Ocho productos: alta y listado; rechazo de textos numéricos; precio del Flan casero corregido a 4000.
+- [x] Pedido con dos hamburguesas clásicas: total 17000; confirmación y descuento real de stock 20 -> 18.
+- [x] Cancelación y reposición 18 -> 20; segunda cancelación rechazada sin modificar stock.
+- [x] Baja lógica del pedido cancelado, ausencia del listado activo, historial conservado y stock intacto.
+- [x] Borrador preparado para rollback: hamburguesa clásica ID 1 (1 unidad) + doble cheddar ID 2 (1 unidad), total 20500; stock previo verificado en Workbench: ID 1 = 20, ID 2 = 15, ambos disponibles.
+
+## Pruebas todavía pendientes
+
+- [ ] Forzar stock insuficiente en segundo producto, demostrar rollback íntegro y restaurar stock.
+- [ ] Verificar reasignación entre categorías y bloqueo de baja con productos activos.
+- [ ] Mostrar pérdida de usuario/pedido tras reinicio en el flujo de demostración final.
+- [ ] Auditoría de entradas inválidas, stock, errores y estados de pedidos.
+
+## Secuencia sugerida para grabar (ajustar tiempos)
+
+1. Presentación del proyecto, tecnologías y arquitectura por capas.
+2. Arranque y diagnóstico JDBC; base con las dos tablas permitidas.
+3. CRUD de categorías y productos; asociación categoría-productos.
+4. CRUD de usuarios en memoria.
+5. Alta de pedido, detalle, subtotal y cálculo de total con `Calculable`.
+6. Confirmación y descuento de stock, cancelación y reposición; historial y bajas lógicas.
+7. Rollback comprobado en un caso controlado (una vez verificado).
+8. Reiniciar: categorías y productos permanecen; usuarios y pedidos desaparecen.
+9. Cierre, repositorio y documentación.
+
+**Precauciones:** no mostrar contraseñas, emails o teléfonos reales. No crear tablas de usuario/pedido/detalle. No confundir pruebas ya realizadas con pendientes. Mostrar capturas claras del menú, de Workbench y de los resultados.
