@@ -29,6 +29,7 @@ public class MenuPedidos {
         this.servicio = servicio;
     }
 
+    /** Gestiona las operaciones de pedidos y vuelve al menú tras cada operación. */
     public void mostrar() {
         int opcion;
         do {
@@ -74,6 +75,7 @@ public class MenuPedidos {
         }
     }
 
+    /** Consulta el historial de un usuario, incluso si fue dado de baja. */
     private void listarPorUsuario() {
         long id = leerLong("ID del usuario (activo o eliminado): ");
         Usuario usuario = servicio.consultarHistorial(id);
@@ -86,6 +88,7 @@ public class MenuPedidos {
         }
     }
 
+    /** Presenta el estado, forma de pago, total y detalles históricos del pedido. */
     private void mostrarPedido(Usuario usuario, Pedido pedido) {
         String situacion = pedido.isEliminado() ? " [BAJA LÓGICA]" : "";
         String usuarioEliminado = usuario.isEliminado() ? " [USUARIO ELIMINADO]" : "";
@@ -106,6 +109,7 @@ public class MenuPedidos {
         }
     }
 
+    /** Guía la creación del borrador y su confirmación con descuento de stock. */
     private void crear() {
         List<Usuario> usuarios = servicio.listarUsuariosActivos();
         if (usuarios.isEmpty()) {
@@ -186,6 +190,7 @@ public class MenuPedidos {
         }
     }
 
+    /** Solicita un producto y cantidad para incorporar al borrador. */
     private void agregarDetalle(Pedido borrador) {
         mostrarProductos();
         long idProducto = leerLong("ID del producto: ");
@@ -194,6 +199,7 @@ public class MenuPedidos {
         System.out.println("Detalle agregado al pedido.");
     }
 
+    /** Solicita una nueva cantidad para una línea del borrador. */
     private void modificarDetalle(Pedido borrador) {
         mostrarResumen(borrador);
         long id = leerLong("ID del producto a modificar: ");
@@ -202,6 +208,7 @@ public class MenuPedidos {
         System.out.println("Cantidad actualizada.");
     }
 
+    /** Permite dar de baja una línea antes de confirmar el pedido. */
     private void quitarDetalle(Pedido borrador) {
         mostrarResumen(borrador);
         long id = leerLong("ID del producto a quitar: ");
@@ -209,6 +216,7 @@ public class MenuPedidos {
         System.out.println("Detalle eliminado lógicamente del borrador.");
     }
 
+    /** Muestra el total recalculado a partir de los detalles activos. */
     private void mostrarResumen(Pedido borrador) {
         borrador.calcularTotal();
         System.out.println("\nResumen del pedido:");
@@ -225,6 +233,7 @@ public class MenuPedidos {
                 + " | Forma de pago: " + borrador.getFormaPago());
     }
 
+    /** Solicita un nuevo medio de pago para el pedido seleccionado. */
     private void cambiarPago() {
         if (!hayPedidosActivos()) {
             return;
@@ -236,6 +245,7 @@ public class MenuPedidos {
         System.out.println("Forma de pago actualizada.");
     }
 
+    /** Permite indicar si el pedido se terminó o se canceló. */
     private void cambiarEstado() {
         if (!hayPedidosActivos()) {
             return;
@@ -258,6 +268,7 @@ public class MenuPedidos {
         }
     }
 
+    /** Confirma la baja lógica del pedido y delega la reposición cuando corresponde. */
     private void eliminar() {
         if (!hayPedidosActivos()) {
             return;

@@ -22,6 +22,7 @@ import java.util.Scanner;
 /** Punto de entrada del sistema. La interacción se mantiene en consola. */
 public class Main {
 
+    /** Inicializa los servicios y muestra el menú principal de Food Store. */
     public static void main(String[] args) {
         UsuarioRepository usuariosRepository = new UsuarioRepository();
         UsuarioService usuarios = new UsuarioService(usuariosRepository);

@@ -20,6 +20,7 @@ public class MenuProductos {
         this.servicio = servicio;
     }
 
+    /** Presenta las operaciones del catálogo y controla los errores previsibles. */
     public void mostrar() {
         int opcion;
         do {
@@ -61,6 +62,7 @@ public class MenuProductos {
         }
     }
 
+    /** Presenta la categoría seleccionada y sus productos asociados. */
     private void listarPorCategoria() {
         if (!mostrarCategorias()) {
             return;
@@ -77,6 +79,7 @@ public class MenuProductos {
         }
     }
 
+    /** Solicita primero una categoría activa y después los datos del producto. */
     private void crear() {
         if (!mostrarCategorias()) {
             System.out.println("Primero debés crear una categoría activa.");
@@ -99,6 +102,7 @@ public class MenuProductos {
         System.out.println("Producto guardado en la base. ID generado: " + creado.getId());
     }
 
+    /** Permite actualizar campos específicos sin reemplazar los valores omitidos. */
     private void editar() {
         if (servicio.listar().isEmpty()) {
             System.out.println("No hay productos para editar.");
@@ -121,6 +125,7 @@ public class MenuProductos {
         System.out.println("Producto actualizado correctamente.");
     }
 
+    /** Solicita el producto y la nueva categoría sin editar sus otros atributos. */
     private void reasignarCategoria() {
         if (servicio.listar().isEmpty()) {
             System.out.println("No hay productos para reasignar.");
@@ -137,6 +142,7 @@ public class MenuProductos {
         System.out.println("Producto reasignado correctamente.");
     }
 
+    /** Confirma la baja lógica del producto seleccionado. */
     private void eliminar() {
         if (servicio.listar().isEmpty()) {
             System.out.println("No hay productos para eliminar.");

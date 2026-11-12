@@ -16,7 +16,7 @@ Correspondencia entre las historias del TPI, su implementación y la evidencia f
 | USR-01 | Listar usuarios | Comprobado |
 | USR-02 | Crear usuario y correo único | Alta, ID y rechazo de duplicado comprobados |
 | USR-03 | Editar usuario | Edición de correo e ID inexistente comprobados |
-| USR-04 | Baja lógica de usuario | Baja implementada y comprobada; historial de pedidos tras baja del usuario pendiente de prueba aislada |
+| USR-04 | Baja lógica de usuario | Baja e historial de pedidos de un usuario eliminado comprobados |
 | PED-01 | Listar y consultar pedidos por usuario | Lista activa e historial comprobados |
 | PED-02 | Crear pedido con detalles | Agregar, modificar, quitar, calcular y confirmar comprobados; rollback real comprobado |
 | PED-03 | Cambiar estado y forma de pago | Pago y cancelación comprobados; estado TERMINADO pendiente de prueba aislada |

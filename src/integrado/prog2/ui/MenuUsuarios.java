@@ -19,6 +19,7 @@ public class MenuUsuarios {
         this.servicio = servicio;
     }
 
+    /** Presenta las operaciones de usuarios en memoria y captura errores de entrada. */
     public void mostrar() {
         int opcion;
         do {
@@ -56,6 +57,7 @@ public class MenuUsuarios {
         }
     }
 
+    /** Recibe los datos del usuario y delega las validaciones al servicio. */
     private void crear() {
         System.out.println("\n--- CREAR USUARIO [MEMORIA] ---");
         String nombre = leerNombre("Nombre: ", "nombre del usuario");
@@ -68,6 +70,7 @@ public class MenuUsuarios {
         System.out.println("Usuario creado en memoria. ID generado: " + usuario.getId());
     }
 
+    /** Permite seleccionar el campo que se desea modificar. */
     private void editar() {
         if (servicio.listar().isEmpty()) {
             System.out.println("No hay usuarios para editar.");
@@ -95,6 +98,7 @@ public class MenuUsuarios {
         System.out.println("Usuario actualizado correctamente.");
     }
 
+    /** Confirma la baja lógica sin eliminar el historial de pedidos. */
     private void eliminar() {
         if (servicio.listar().isEmpty()) {
             System.out.println("No hay usuarios para eliminar.");

@@ -19,6 +19,7 @@ public class MenuCategorias {
         this.servicio = servicio;
     }
 
+    /** Mantiene el menú activo hasta que el operador elige volver. */
     public void mostrar() {
         int opcion;
         do {
@@ -56,6 +57,7 @@ public class MenuCategorias {
         }
     }
 
+    /** Solicita y valida los datos de una categoría antes de registrarla. */
     private void crear() {
         System.out.println("\n--- NUEVA CATEGORÍA ---");
         String nombre = leerTextoValidado("Nombre: ", "nombre de categoría", 100, true);
@@ -65,6 +67,7 @@ public class MenuCategorias {
         System.out.println("Categoría registrada en la base. ID: " + creada.getId());
     }
 
+    /** Permite modificar una categoría conservando los campos que se dejan vacíos. */
     private void editar() {
         if (servicio.listar().isEmpty()) {
             System.out.println("No hay categorías para editar.");
@@ -81,6 +84,7 @@ public class MenuCategorias {
         System.out.println("Categoría actualizada correctamente.");
     }
 
+    /** Solicita confirmación de la baja lógica antes de delegarla al servicio. */
     private void eliminar() {
         if (servicio.listar().isEmpty()) {
             System.out.println("No hay categorías para eliminar.");
