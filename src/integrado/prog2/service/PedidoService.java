@@ -21,6 +21,13 @@ public class PedidoService {
     private final ProductoDAO productos;
     private final StockDAO stock;
 
+    /**
+     * Construye el servicio con los repositorios de memoria y los DAO del catálogo.
+     * @param usuarios repositorio de usuarios que conserva los pedidos
+     * @param pedidos gestor de identificadores y consultas de pedidos
+     * @param productos acceso JDBC al catálogo
+     * @param stock acceso transaccional a las existencias
+     */
     public PedidoService(UsuarioRepository usuarios, PedidoRepository pedidos,
                          ProductoDAO productos, StockDAO stock) {
         if (usuarios == null || pedidos == null || productos == null || stock == null) {
@@ -48,7 +55,13 @@ public class PedidoService {
         return pedidos.buscarActivo(idPedido);
     }
 
-    /** Crea un borrador en memoria; no lo registra hasta descontar todo el stock. */
+    /**
+     * Crea un borrador de pedido para un usuario activo.
+     * El borrador no ingresa al historial hasta confirmar el descuento de stock.
+     * @param idUsuario identificador de un usuario activo
+     * @param pago medio de pago seleccionado
+     * @return nuevo pedido pendiente de confirmación
+     */
     public Pedido iniciar(long idUsuario, FormaPago pago) {
         usuarios.buscarActivo(idUsuario);
         return new Pedido(pago);
@@ -58,6 +71,11 @@ public class PedidoService {
         return productos.listarActivos();
     }
 
+    /**
+     * Agrega una línea al borrador, verificando la existencia y disponibilidad
+     * del producto en el catálogo JDBC.
+     * @throws StockInvalidoException si la cantidad supera las existencias
+     */
     public void agregarDetalle(Pedido borrador, long idProducto, int cantidad) {
         validarBorrador(borrador);
         if (cantidad <= 0) {
@@ -68,6 +86,10 @@ public class PedidoService {
         borrador.addDetallePedido(cantidad, producto.getPrecio(), producto);
     }
 
+    /**
+     * Cambia la cantidad de un detalle antes de confirmar la compra.
+     * El pedido recalcula su subtotal y total en memoria.
+     */
     public void cambiarCantidad(Pedido borrador, long idProducto, int cantidad) {
         validarBorrador(borrador);
         if (cantidad <= 0) {
@@ -78,6 +100,9 @@ public class PedidoService {
         borrador.actualizarCantidadDetalle(producto, cantidad);
     }
 
+    /**
+     * Da de baja lógicamente una línea del borrador sin modificar MySQL.
+     */
     public void eliminarDetalle(Pedido borrador, long idProducto) {
         validarBorrador(borrador);
         Producto producto = productos.buscarPorId(idProducto);
@@ -101,6 +126,12 @@ public class PedidoService {
         }
     }
 
+    /**
+     * Confirma el pedido tras descontar todas sus líneas en MySQL.
+     * Si falla el descuento, StockDAO revierte la transacción y el pedido
+     * no se incorpora al historial del usuario.
+     * @return pedido confirmado y registrado en memoria
+     */
     public Pedido confirmar(long idUsuario, Pedido borrador) {
         Usuario usuario = usuarios.buscarActivo(idUsuario);
         if (borrador == null || borrador.getEstado() != Estado.PENDIENTE
@@ -116,6 +147,10 @@ public class PedidoService {
         return borrador;
     }
 
+    /**
+     * Modifica el medio de pago de un pedido confirmado.
+     * No altera los detalles ni las existencias del catálogo.
+     */
     public void actualizarPago(long idPedido, FormaPago pago) {
         Pedido pedido = pedidos.buscarActivo(idPedido);
         if (pedido.getEstado() != Estado.CONFIRMADO) {
@@ -124,6 +159,10 @@ public class PedidoService {
         pedido.setFormaPago(pago);
     }
 
+    /**
+     * Cambia el estado de un pedido confirmado a TERMINADO o CANCELADO.
+     * La cancelación repone el stock antes de cambiar el estado en memoria.
+     */
     public void actualizarEstado(long idPedido, Estado nuevoEstado) {
         Pedido pedido = pedidos.buscarActivo(idPedido);
         if (pedido.getEstado() != Estado.CONFIRMADO) {
@@ -140,7 +179,11 @@ public class PedidoService {
         }
     }
 
-    /** No se repone dos veces el stock de un pedido ya cancelado. */
+    /**
+     * Da de baja lógicamente un pedido.
+     * Repone el stock si el pedido seguía CONFIRMADO, pero no si ya fue
+     * CANCELADO o TERMINADO; así se evita duplicar las existencias.
+     */
     public void eliminar(long idPedido) {
         Pedido pedido = pedidos.buscarActivo(idPedido);
         if (pedido.getEstado() == Estado.CONFIRMADO) {
