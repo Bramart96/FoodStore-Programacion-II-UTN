@@ -4,20 +4,19 @@ build/
 dist/
 *.class
 
-# NetBeans: datos locales y privados
-nbproject/private/
+# Driver JDBC instalado localmente
+lib/*.jar
 
-# IDE y sistema
+# NetBeans y otros IDE
+nbproject/private/
 .idea/
 .vscode/
+
+# Archivos temporales o privados
 .DS_Store
 Thumbs.db
-
-# Configuraciones sensibles
 .env
 .env.*
 *.log
-
-# Copias de seguridad de bases de datos
 *.sql.bak
 *.dump

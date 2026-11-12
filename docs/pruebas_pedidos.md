@@ -1,78 +1,43 @@
-# Pruebas manuales — Pedidos y stock (Food Store)
+# Pruebas manuales de pedidos y stock
 
-Este plan comprueba las historias HU-PED-01 a HU-PED-04. Registrar los resultados reales; no incluir contraseñas ni datos personales en capturas.
+Escenarios reproducibles desde la aplicación de consola. Utilizar usuarios ficticios y anotar el stock inicial antes de cada prueba.
 
 ## Preparación
-1. Ejecutar `git pull origin main` desde PowerShell y compilar con `javac --release 21`.
-2. Mantener la contraseña local en `bin/META-INF/persistence.xml` (no sobrescribirla).
-3. Ejecutar `java -cp "bin;lib/*" integrado.prog2.Main`.
-4. Comprobar conexión con MySQL. Verificar precios y stock desde el menú Productos.
-5. Crear un **usuario de prueba ficticio** desde Usuarios (los usuarios se pierden al reiniciar).
 
-## Casos
+1. Confirmar la conexión MySQL al iniciar Java.
+2. Verificar en Productos las existencias de los artículos elegidos.
+3. Crear un usuario ficticio, ya que los usuarios no se guardan al reiniciar.
+4. Acceder a Pedidos y detalles desde el menú principal.
 
-| ID | Acción | Resultado esperado |
+## Escenarios
+
+| Caso | Operación | Resultado esperado |
 |---|---|---|
-| PED-T01 | Entrar en Pedidos > Listar antes de crear alguno | Mensaje de listado vacío |
-| PED-T02 | Crear pedido con usuario válido; agregar 2 unidades de un producto | El borrador informa subtotal y total; MySQL no cambia antes de confirmar |
-| PED-T03 | Agregar un segundo producto; confirmar | Pedido ID generado, estado CONFIRMADO, productos descontados exactamente |
-| PED-T04 | Reiniciar el programa tras confirmar | Productos conservan el stock actualizado; usuario y pedido ya no existen |
-| PED-T05 | Crear otro pedido y cancelar por estado | Estado CANCELADO; stock se repone una sola vez |
-| PED-T06 | Intentar modificar pedido CANCELADO | Se rechaza con mensaje controlado |
-| PED-T07 | Crear otro pedido, luego eliminarlo lógicamente | No se lista entre activos; stock se repone y consulta de historial muestra la baja |
-| PED-T08 | Eliminar un usuario con pedidos existentes | No aparece entre usuarios activos; sus pedidos se consultan por ID en historial |
-| PED-T09 | Añadir cantidad 0 o mayor al stock disponible | Rechazo sin guardar pedido ni modificar stock |
-| PED-T10 | Provocar falta de stock entre borrador y confirmación con dos productos | Transacción revierte todas las actualizaciones y no registra pedido (prueba controlada, después de las básicas) |
+| PED-01 | Intentar confirmar un borrador sin detalles | Se solicita agregar al menos un detalle |
+| PED-02 | Agregar un producto, modificar su cantidad y consultar el resumen | Subtotal y total recalculados |
+| PED-03 | Quitar un detalle del borrador | El detalle deja de contar en el total |
+| PED-04 | Confirmar un pedido válido | Se crea el pedido en memoria y MySQL descuenta exactamente las cantidades |
+| PED-05 | Cambiar el pago de un pedido confirmado | Se conserva estado, cantidad y total |
+| PED-06 | Cancelar un pedido confirmado | MySQL repone el stock |
+| PED-07 | Intentar cancelar nuevamente un pedido cancelado | Se rechaza el cambio sin duplicar el stock |
+| PED-08 | Dar de baja lógicamente un pedido cancelado | No aparece entre activos, pero sí en el historial |
+| PED-09 | Forzar stock insuficiente en el segundo producto durante la confirmación | Rollback completo y ausencia de pedido registrado |
+| PED-10 | Reiniciar la aplicación | Usuarios y pedidos desaparecen; productos y categorías persisten |
 
-## Consultas de control en Workbench
+Los casos PED-01 a PED-10 tienen evidencia manual de sus operaciones principales en el desarrollo.
 
-Solo consultar; no modificar el catálogo durante las pruebas normales:
+## Comprobación de rollback con dos productos
 
-```sql
-SELECT id, nombre, precio, stock, disponible, eliminado
-FROM foodstore_prog2.producto
-ORDER BY id;
-```
+1. Preparar un borrador con dos detalles y **no confirmarlo** todavía.
+2. Consultar y anotar las existencias de ambos productos en MySQL Workbench.
+3. Desde una sesión SQL, cambiar temporalmente el stock del **segundo** producto a cero.
+4. Intentar confirmar desde Java; la operación debe informar stock insuficiente.
+5. Consultar nuevamente MySQL: el stock del primer producto debe seguir en su valor original.
+6. Verificar en Pedidos que el pedido rechazado no se haya registrado en memoria.
+7. Restaurar el stock original del segundo producto y verificar el resultado.
 
-En una prueba de rollback se pueden simular cambios de stock desde una segunda sesión, siempre anotando valores previos y restaurándolos después. No se debe ejecutar DELETE ni crear tablas de usuarios o pedidos.
+No ejecutar `DELETE`, no crear tablas adicionales y no modificar simultáneamente otros datos del catálogo. El programa usa `UPDATE` transaccionales para descontar y reponer existencias.
 
-## Estado
-Código publicado; resultados funcionales del módulo de pedidos **aún pendientes de confirmar por el estudiante**.
+## Otros escenarios de borde
 
-## ROLLBACK — preparación real comprobada (11/11/2026)
-
-El estudiante dejó preparado en consola un pedido **sin confirmar** con los productos ID 1 (Hamburguesa clásica, 1 unidad) e ID 2 (Hamburguesa doble cheddar, 1 unidad); total de borrador: **20500**. Se verificó en MySQL Workbench, antes de forzar el error:
-
-- ID 1: stock **20**, disponible **1**.
-- ID 2: stock **15**, disponible **1**.
-
-**Aún no se ejecutó la prueba de rollback ni se modificó el stock para provocarla.** Pasos posteriores: cambiar temporalmente el stock del ID 2 a cero, confirmar el borrador, comprobar que el stock del ID 1 no disminuye y que no se guarda pedido en memoria, y restaurar ID 2 a 15. Usar UPDATE restringido por ID y valor anterior, verificar filas afectadas. No repetir confirmación antes de restaurar los valores.
-
-
-## Resultado manual de PED-T10 — 11/11/2026
-- Pedido de prueba: una unidad del producto 1 ($8500) y una del producto 2 ($12000), total $20500.
-- Stocks de partida en MySQL: ID 1 = 20; ID 2 = 15.
-- Se cambió temporalmente el stock de ID 2 a 0 en Workbench.
-- El estudiante intentó confirmar; el programa comunicó stock insuficiente del ID 2 y rechazó la confirmación.
-- La consulta de Workbench posterior mostró ID 1 = 20 e ID 2 = 0; el primer descuento fue revertido.
-- **Comprobado:** rollback sin descuentos parciales.
-- **Aún pendiente:** restauración del ID 2 a 15 y ausencia del pedido fallido en memoria.
-
-
-### Cierre de PED-T10 — comprobación en menú
-- Se restauró el stock temporal del producto ID 2 a 15 (ID 1 se mantuvo en 20).
-- Captura de PowerShell aportada por el estudiante: mensaje "No hay pedidos activos en memoria".
-- En consulta por usuario ID 1 aparece únicamente el pedido anterior ID 1 [BAJA LÓGICA], estado CANCELADO, total 17000, con detalle histórico.
-- No aparece el pedido fallido de 20500.
-- **PED-T10 validado en JDBC y en memoria.**
-
-
-### Prueba de reinicio de pedidos en memoria — 11/11/2026
-- Tras salir y volver a iniciar Java, el estudiante verificó que no hay pedidos en memoria y que la lista de usuarios también está vacía.
-- La comprobación de persistencia del catálogo JDBC tras ese reinicio se realizará por separado.
-
-
-### Persistencia después de reinicio — validada 11/11/2026
-- Reinicio real desde PowerShell: usuarios y pedidos vacíos en memoria.
-- Catálogo JDBC conservado: 4 categorías y 8 productos; stocks ID 1 = 20 e ID 2 = 15.
-- **Caso de persistencia mixta validado.**
+Pendientes de comprobación aislada: pedido marcado TERMINADO y baja lógica de producto con historial de pedidos. No es necesario mostrarlos todos en el video, pero el comportamiento debe respetar la consigna.
