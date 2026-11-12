@@ -17,6 +17,10 @@ public class PedidoRepository {
     private long siguientePedidoId = 1;
     private long siguienteDetalleId = 1;
 
+    /**
+     * Utiliza el repositorio de usuarios para navegar sus pedidos
+     * sin incorporar una referencia inversa desde Pedido hacia Usuario.
+     */
     public PedidoRepository(UsuarioRepository usuarios) {
         if (usuarios == null) {
             throw new IllegalArgumentException("El repositorio de usuarios es obligatorio.");
@@ -24,6 +28,10 @@ public class PedidoRepository {
         this.usuarios = usuarios;
     }
 
+    /**
+     * Asigna los identificadores de pedido y detalles y vincula el pedido
+     * con su usuario. La confirmación del stock debe ocurrir antes.
+     */
     public void registrar(Usuario usuario, Pedido pedido) {
         if (usuario == null || usuario.isEliminado()
                 || pedido == null || pedido.getId() != null
@@ -38,6 +46,10 @@ public class PedidoRepository {
         usuario.agregarPedido(pedido);
     }
 
+    /**
+     * Busca un pedido no eliminado recorriendo los usuarios y sus pedidos.
+     * @throws EntidadNoEncontradaException si no existe un pedido activo
+     */
     public Pedido buscarActivo(long idPedido) {
         for (Usuario usuario : usuarios.listarTodos()) {
             for (Pedido pedido : usuario.getPedidos()) {
@@ -51,6 +63,10 @@ public class PedidoRepository {
                 "No existe un pedido activo con ID " + idPedido + ".");
     }
 
+    /**
+     * Devuelve los usuarios con al menos un pedido activo, incluidos aquellos
+     * cuya baja lógica no debe ocultar el historial de sus pedidos.
+     */
     public List<Usuario> listarUsuariosConPedidos() {
         List<Usuario> encontrados = new ArrayList<>();
         for (Usuario usuario : usuarios.listarTodos()) {
