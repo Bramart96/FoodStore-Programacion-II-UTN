@@ -18,6 +18,11 @@ public class StockDAO {
     private final ConexionDB conexionDB;
     private final ConfiguracionDB configuracion;
 
+    /**
+     * Prepara el acceso al stock con la conexión y configuración externa.
+     * @param conexionDB responsable de abrir conexiones JDBC
+     * @param configuracion datos de la unidad de persistencia
+     */
     public StockDAO(ConexionDB conexionDB, ConfiguracionDB configuracion) {
         if (conexionDB == null || configuracion == null) {
             throw new IllegalArgumentException("La conexión y su configuración son obligatorias.");
@@ -26,10 +31,20 @@ public class StockDAO {
         this.configuracion = configuracion;
     }
 
+    /**
+     * Descuenta las cantidades de todas las líneas de una compra.
+     * Si alguna línea no puede descontarse, se revierte toda la operación.
+     * @param detalles líneas activas del pedido a confirmar
+     */
     public void descontar(List<DetallePedido> detalles) {
         ejecutarTransaccion(detalles, false);
     }
 
+    /**
+     * Restituye las cantidades de todas las líneas de un pedido cancelado.
+     * La reposición también es atómica para evitar ajustes parciales.
+     * @param detalles líneas activas del pedido
+     */
     public void reponer(List<DetallePedido> detalles) {
         ejecutarTransaccion(detalles, true);
     }
