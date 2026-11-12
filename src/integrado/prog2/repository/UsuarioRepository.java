@@ -12,6 +12,7 @@ public class UsuarioRepository {
     private final List<Usuario> usuarios = new ArrayList<>();
     private long siguienteId = 1;
 
+    /** Valida el correo y asigna un identificador antes de incorporar el usuario a la colección. */
     public Usuario guardar(Usuario usuario) {
         if (usuario == null || usuario.getId() != null) {
             throw new IllegalArgumentException("Debe indicar un usuario nuevo.");
@@ -22,6 +23,7 @@ public class UsuarioRepository {
         return usuario;
     }
 
+    /** Filtra los usuarios eliminados sin modificar la colección original. */
     public List<Usuario> listarActivos() {
         List<Usuario> activos = new ArrayList<>();
         for (Usuario usuario : usuarios) {
@@ -32,6 +34,7 @@ public class UsuarioRepository {
         return List.copyOf(activos);
     }
 
+    /** Busca un usuario activo e informa un ID inexistente mediante una excepción propia. */
     public Usuario buscarActivo(long id) {
         for (Usuario usuario : usuarios) {
             if (usuario.getId().equals(id) && !usuario.isEliminado()) {
@@ -68,6 +71,7 @@ public class UsuarioRepository {
         throw new EntidadNoEncontradaException("No existe un usuario con ID " + id + ".");
     }
 
+    /** Marca al usuario como eliminado y conserva el objeto junto a sus pedidos. */
     public void eliminar(long id) {
         buscarActivo(id).eliminar();
     }

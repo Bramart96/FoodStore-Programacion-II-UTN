@@ -32,6 +32,7 @@ public class CategoriaDAO implements GenericDAO<Categoria> {
         this.configuracion = configuracion;
     }
 
+    /** Recupera solamente las categorías que no fueron dadas de baja. */
     @Override
     public List<Categoria> listarActivos() {
         String sql = "SELECT id, nombre, descripcion, eliminado, created_at "
@@ -50,6 +51,7 @@ public class CategoriaDAO implements GenericDAO<Categoria> {
         }
     }
 
+    /** Busca una categoría activa con una consulta parametrizada. */
     @Override
     public Categoria buscarPorId(long id) {
         String sql = "SELECT id, nombre, descripcion, eliminado, created_at "
@@ -69,6 +71,7 @@ public class CategoriaDAO implements GenericDAO<Categoria> {
         }
     }
 
+    /** Comprueba la unicidad del nombre, inserta la categoría y recupera el ID generado. */
     public Categoria insertar(Categoria categoria) {
         if (categoria == null || categoria.getId() != null) {
             throw new IllegalArgumentException("Debe indicar una categoría nueva.");
@@ -96,6 +99,7 @@ public class CategoriaDAO implements GenericDAO<Categoria> {
         }
     }
 
+    /** Actualiza una categoría activa respetando la unicidad de su nombre. */
     @Override
     public void actualizar(Categoria categoria) {
         if (categoria == null || categoria.getId() == null) {
@@ -121,6 +125,7 @@ public class CategoriaDAO implements GenericDAO<Categoria> {
         }
     }
 
+    /** Impide la baja cuando existen productos activos asociados; no realiza borrado físico. */
     @Override
     public void eliminar(long id) {
         String sql = "UPDATE categoria SET eliminado = TRUE "

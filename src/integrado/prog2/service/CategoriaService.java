@@ -17,14 +17,17 @@ public class CategoriaService {
         this.dao = dao;
     }
 
+    /** Consulta las categorías activas del catálogo. */
     public List<Categoria> listar() {
         return dao.listarActivos();
     }
 
+    /** Recupera una categoría activa por su identificador. */
     public Categoria buscar(long id) {
         return dao.buscarPorId(id);
     }
 
+    /** Valida los textos y registra una categoría nueva mediante JDBC. */
     public Categoria crear(String nombre, String descripcion) {
         return dao.insertar(new Categoria(
                 ValidacionTexto.obligatorio(nombre, "nombre de categoría", 100),
@@ -45,6 +48,7 @@ public class CategoriaService {
         dao.actualizar(categoria);
     }
 
+    /** Solicita la baja lógica; el DAO impide eliminar categorías con productos activos. */
     public void eliminar(long id) {
         dao.eliminar(id);
     }

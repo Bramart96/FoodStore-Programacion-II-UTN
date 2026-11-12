@@ -31,6 +31,7 @@ public class ProductoDAO implements GenericDAO<Producto> {
         this.configuracion = configuracion;
     }
 
+    /** Recupera los productos activos y los convierte en objetos del dominio. */
     @Override
     public List<Producto> listarActivos() {
         String sql = "SELECT id, nombre, precio, descripcion, stock, imagen, "
@@ -45,6 +46,7 @@ public class ProductoDAO implements GenericDAO<Producto> {
         }
     }
 
+    /** Filtra productos activos por la clave foránea de su categoría. */
     public List<Producto> listarPorCategoria(long idCategoria) {
         String sql = "SELECT id, nombre, precio, descripcion, stock, imagen, "
                    + "disponible, eliminado, created_at FROM producto "
@@ -60,6 +62,7 @@ public class ProductoDAO implements GenericDAO<Producto> {
         }
     }
 
+    /** Recupera un producto activo por su ID mediante SQL parametrizado. */
     @Override
     public Producto buscarPorId(long id) {
         String sql = "SELECT id, nombre, precio, descripcion, stock, imagen, "
@@ -108,6 +111,7 @@ public class ProductoDAO implements GenericDAO<Producto> {
         }
     }
 
+    /** Actualiza los datos propios del producto sin cambiar la clave foránea de categoría. */
     @Override
     public void actualizar(Producto producto) {
         if (producto == null || producto.getId() == null) {
@@ -145,6 +149,7 @@ public class ProductoDAO implements GenericDAO<Producto> {
         }
     }
 
+    /** Aplica la baja lógica para conservar el registro y sus datos históricos. */
     @Override
     public void eliminar(long id) {
         String sql = "UPDATE producto SET eliminado = TRUE "

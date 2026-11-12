@@ -23,6 +23,7 @@ public class ProductoService {
         this.categoriaDAO = categoriaDAO;
     }
 
+    /** Consulta el catálogo de productos activos. */
     public List<Producto> listar() {
         return productoDAO.listarActivos();
     }
@@ -48,6 +49,7 @@ public class ProductoService {
         return categoria;
     }
 
+    /** Valida los datos del producto y la categoría activa antes de guardarlo. */
     public Producto crear(String nombre, Double precio, String descripcion,
                          int stock, String imagen, Boolean disponible, long idCategoria) {
         String nombreValido = ValidacionTexto.obligatorio(nombre, "nombre del producto", 120);
@@ -98,10 +100,12 @@ public class ProductoService {
         }
     }
 
+    /** Modifica la asociación en la base de datos sin añadir una referencia inversa a Producto. */
     public void reasignarCategoria(long idProducto, long idCategoria) {
         productoDAO.reasignarCategoria(idProducto, idCategoria);
     }
 
+    /** Da de baja lógicamente un producto, conservando su registro en la base. */
     public void eliminar(long id) {
         productoDAO.eliminar(id);
     }

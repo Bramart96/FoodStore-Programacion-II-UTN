@@ -18,6 +18,7 @@ public class UsuarioService {
         this.repositorio = repositorio;
     }
 
+    /** Crea un usuario en memoria tras validar sus datos y la unicidad de su correo. */
     public Usuario crear(String nombre, String apellido, String mail,
                          String celular, String contrasena, Rol rol) {
         Usuario usuario = new Usuario(
@@ -27,10 +28,12 @@ public class UsuarioService {
         return repositorio.guardar(usuario);
     }
 
+    /** Devuelve los usuarios que no han sido dados de baja. */
     public List<Usuario> listar() {
         return repositorio.listarActivos();
     }
 
+    /** Busca un usuario activo; el repositorio informa si no existe. */
     public Usuario buscar(long id) {
         return repositorio.buscarActivo(id);
     }
@@ -45,6 +48,7 @@ public class UsuarioService {
                 apellido, "apellido del usuario", 100));
     }
 
+    /** Actualiza el correo sin permitir duplicados, excluyendo al usuario que se edita. */
     public void cambiarMail(long id, String mail) {
         Usuario usuario = buscar(id);
         // El propio objeto valida el formato antes de reemplazar el valor.
@@ -65,6 +69,7 @@ public class UsuarioService {
         buscar(id).setRol(rol);
     }
 
+    /** Marca al usuario como eliminado sin borrar su historial de pedidos. */
     public void eliminar(long id) {
         repositorio.eliminar(id);
     }

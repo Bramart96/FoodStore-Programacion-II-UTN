@@ -12,6 +12,7 @@ public class ConexionService {
         this.conexionDB = conexionDB;
     }
 
+    /** Comprueba el acceso a la base de datos mediante el DAO de conexión. */
     public void verificar(ConfiguracionDB configuracion) {
         conexionDB.verificar(configuracion);
     }
