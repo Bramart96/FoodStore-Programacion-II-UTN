@@ -40,4 +40,4 @@ No ejecutar `DELETE`, no crear tablas adicionales y no modificar simultáneament
 
 ## Otros escenarios de borde
 
-Pendientes de comprobación aislada: pedido marcado TERMINADO y baja lógica de producto con historial de pedidos. No es necesario mostrarlos todos en el video, pero el comportamiento debe respetar la consigna.
+Se comprobó la baja de un pedido confirmado con reposición de stock y el bloqueo de cambios en un pedido TERMINADO. Queda sin evidencia aislada la baja lógica de producto con historial de pedidos. No es necesario mostrarlos todos en el video, pero el comportamiento debe respetar la consigna.

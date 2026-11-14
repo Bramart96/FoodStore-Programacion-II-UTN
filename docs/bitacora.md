@@ -36,7 +36,7 @@ Este documento resume decisiones de diseño y verificaciones del proyecto, sin r
 
 ## Comprobaciones de cierre
 
-Los recorridos principales se probaron en el equipo de desarrollo y el código se recompiló con `javac --release 21`. Quedan como controles de borde específicos, sin considerarlos previamente demostrados: la finalización de un pedido y la baja de un producto vinculado a un pedido histórico.
+Los recorridos principales se probaron en el equipo de desarrollo y el código se recompiló con `javac --release 21`. Quedan como controles de borde específicos, sin considerarlos previamente demostrados: la baja de un producto vinculado a un pedido histórico.
 
 La preparación del video y del archivo ZIP corresponde a la etapa de entrega; no modifica el diseño de la aplicación.
 
@@ -46,3 +46,9 @@ La preparación del video y del archivo ZIP corresponde a la etapa de entrega; n
 - Los comentarios internos se reservan para decisiones que no son evidentes a simple vista, como la transacción JDBC o la dirección de relaciones del UML.
 - Los mensajes de consola describen el resultado de cada operación sin mostrar excepciones técnicas innecesarias ni contraseñas.
 - La documentación no cambia la lógica ni sustituye las pruebas funcionales.
+
+## Controles finales
+
+- Compilación con Java 21 y conexión JDBC verificadas en el equipo de ejecución.
+- Baja lógica de un pedido confirmado: reposición de stock y conservación del historial verificadas.
+- Estado TERMINADO: bloqueo de modificaciones posteriores verificado.

@@ -19,8 +19,8 @@ Correspondencia entre las historias del TPI, su implementación y la evidencia f
 | USR-04 | Baja lógica de usuario | Baja e historial de pedidos de un usuario eliminado comprobados |
 | PED-01 | Listar y consultar pedidos por usuario | Lista activa e historial comprobados |
 | PED-02 | Crear pedido con detalles | Agregar, modificar, quitar, calcular y confirmar comprobados; rollback real comprobado |
-| PED-03 | Cambiar estado y forma de pago | Pago y cancelación comprobados; estado TERMINADO pendiente de prueba aislada |
-| PED-04 | Baja lógica de pedido | Baja de pedido cancelado y conservación de historial comprobadas |
+| PED-03 | Cambiar estado y forma de pago | Pago, cancelación, estado TERMINADO y bloqueo de modificaciones comprobados |
+| PED-04 | Baja lógica de pedido | Baja de pedido cancelado y confirmado, reposición de stock y conservación del historial comprobadas |
 | CFG-01 | Mostrar unidad y URL JDBC | Funcionalidad implementada y consultada en el entorno de pruebas |
 | CFG-02 | Diagnosticar conexión y errores | Inicio con MySQL y error de driver sin cierre inesperado comprobados |
 | CFG-03 | Script SQL y ejecución | Esquema de dos tablas instalado y ejecución con javac/java comprobados |
