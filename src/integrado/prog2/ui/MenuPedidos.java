@@ -158,8 +158,8 @@ public class MenuPedidos {
                         // y se descarta el borrador: no queda un pedido registrado.
                         try {
                             Pedido confirmado = servicio.confirmar(usuarioId, borrador);
-                            System.out.println("Pedido confirmado en memoria. ID: "
-                                    + confirmado.getId() + ". Stock actualizado en MySQL.");
+                            System.out.println("Pedido confirmado correctamente. ID: " + confirmado.getId());
+                            System.out.println("Stock de productos actualizado.");
                         } catch (EntidadNoEncontradaException | PersistenciaException
                          | IllegalArgumentException | IllegalStateException ex) {
                             System.out.println("No se confirmó el pedido: " + ex.getMessage());
@@ -260,7 +260,7 @@ public class MenuPedidos {
             System.out.println("Pedido terminado.");
         } else if (opcion == 2) {
             servicio.actualizarEstado(id, Estado.CANCELADO);
-            System.out.println("Pedido cancelado. Stock repuesto en MySQL.");
+            System.out.println("Pedido cancelado. Stock de productos restituido.");
         } else if (opcion == 0) {
             System.out.println("Sin cambios.");
         } else {
@@ -279,8 +279,7 @@ public class MenuPedidos {
         String respuesta = leerTexto("¿Confirmar baja lógica del pedido? (S/N): ");
         if (respuesta.equalsIgnoreCase("S")) {
             servicio.eliminar(id);
-            System.out.println("Pedido eliminado lógicamente.");
-            System.out.println("Se repuso stock solo si el pedido estaba CONFIRMADO.");
+            System.out.println("Pedido eliminado lógicamente. Se conserva su historial.");
         } else {
             System.out.println("Operación cancelada.");
         }
