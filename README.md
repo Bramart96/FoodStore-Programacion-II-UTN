@@ -92,6 +92,6 @@ Para el detalle de escenarios y cobertura, consultar [la matriz de historias](do
 
 ## Video demostrativo
 
-El enlace al video público se agregará aquí antes de la entrega.
+[Ver demostración de Food Store en YouTube](https://www.youtube.com/watch?v=WyZeQiygnSw).
 
 **Seguridad:** utilizar datos ficticios para las pruebas; no publicar contraseñas de MySQL, datos de acceso ni información personal real.

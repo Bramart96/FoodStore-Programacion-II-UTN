@@ -8,7 +8,9 @@ dist/
 lib/*.jar
 
 # NetBeans y otros IDE
-nbproject/private/
+nbproject/
+build.xml
+manifest.mf
 .idea/
 .vscode/
 
